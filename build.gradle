@@ -1,23 +1,14 @@
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.7.1'
+    id 'com.github.ben-manes.versions' version '0.13.0'
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
-    }
-}
-
-project.ext {
-    artifactId = "http-client"
-    group = 'com.github.michaelruocco'
-    version = '2.0.0'
-}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -31,7 +22,7 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.5.2'
+    testCompile 'org.assertj:assertj-core:3.6.1'
 }
 
 jacocoTestReport {
@@ -82,13 +73,9 @@ uploadArchives {
                 packaging 'jar'
                 name 'Http Client'
                 description 'Code library to enable easy interaction with restful json apis'
-                groupId project.ext.group
-                if (project.hasProperty('standalone')) {
-                    artifactId standaloneArtifactId
-                } else {
-                    artifactId project.ext.artifactId
-                }
-                version project.ext.version
+                groupId 'com.github.michaelruocco'
+                artifactId 'http-client'
+                version '2.0.0'
                 url 'https://github.com/michaelruocco/http-client'
 
                 developers {
