@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.util.Collection;
 
 import static org.apache.http.HttpHeaders.ACCEPT;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
@@ -76,6 +77,12 @@ public class SimpleHttpClient extends BaseHttpClient {
     private void log(Response response) {
         LOG.info("status code " + response.getStatusCode());
         LOG.info("body " + response.getBody());
+        logHeaders(response);
+    }
+
+    private void logHeaders(Response response) {
+        Collection<String> headersKeys = response.getHeaderKeys();
+        headersKeys.forEach(h -> LOG.info("response header " + h + " with value " + response.getHeader(h)));
     }
 
     private HttpPost createPost(String endpoint, String entity, Headers headers) {
