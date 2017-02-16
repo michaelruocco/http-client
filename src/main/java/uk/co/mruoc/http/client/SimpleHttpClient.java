@@ -11,12 +11,15 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.net.URI;
+import java.net.URLDecoder;
 
 import static org.apache.http.HttpHeaders.ACCEPT;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 public class SimpleHttpClient extends BaseHttpClient {
 
+    private static final String DEFAULT_ENCODING = "utf-8";
     private static final Logger LOG = Logger.getLogger(SimpleHttpClient.class);
 
     private final ResponseConverter converter = new ResponseConverter();
@@ -56,14 +59,23 @@ public class SimpleHttpClient extends BaseHttpClient {
 
     protected Response execute(HttpRequestBase request) {
         try {
-            LOG.info("performing " + request.getMethod() + " on uri " + request.getURI().toString());
+            URI uri = request.getURI();
+            LOG.info("performing " + request.getMethod() + " on uri " + uri.toString());
+            LOG.info("decoded uri is " + URLDecoder.decode(uri.toString(), DEFAULT_ENCODING));
             HttpResponse rawResponse = client.execute(request);
-            return converter.toResponse(rawResponse);
+            Response response = converter.toResponse(rawResponse);
+            log(response);
+            return response;
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         } finally {
             request.releaseConnection();
         }
+    }
+
+    private void log(Response response) {
+        LOG.info("status code " + response.getStatusCode());
+        LOG.info("body " + response.getBody());
     }
 
     private HttpPost createPost(String endpoint, String entity, Headers headers) {

@@ -1,5 +1,8 @@
 package uk.co.mruoc.http.client;
 
+import java.util.Collection;
+import java.util.List;
+
 public class Response {
 
     private final int statusCode;
@@ -22,6 +25,10 @@ public class Response {
 
     public String getHeader(String key) {
         return headers.get(key);
+    }
+
+    public Collection<String> getHeaderKeys() {
+        return headers.getNames();
     }
 
     public static class ResponseBuilder {

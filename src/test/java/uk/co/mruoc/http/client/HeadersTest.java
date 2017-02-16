@@ -31,4 +31,13 @@ public class HeadersTest {
         assertThat(headers.get("name")).isEqualTo("value2");
     }
 
+    @Test
+    public void shouldReturnHeaderKeys() {
+        Headers headers = new Headers();
+        headers.add("name1", "value1");
+        headers.add("name2", "value2");
+
+        assertThat(headers.getNames()).containsExactlyInAnyOrder("name1", "name2");
+    }
+
 }
