@@ -117,7 +117,7 @@ public class FakeApacheHttpClient implements HttpClient {
         return null;
     }
 
-     Request lastRequest() {
+    public Request lastRequest() {
         return requests.get(requests.size() - 1);
     }
 
@@ -128,7 +128,7 @@ public class FakeApacheHttpClient implements HttpClient {
             setHeaders(apacheResponse, headers);
             return apacheResponse;
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new HttpClientException(e);
         }
     }
 
