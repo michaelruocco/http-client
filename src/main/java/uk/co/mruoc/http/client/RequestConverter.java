@@ -3,7 +3,8 @@ package uk.co.mruoc.http.client;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -12,7 +13,7 @@ import static uk.co.mruoc.http.client.Request.*;
 
 public class RequestConverter {
 
-    private static final Logger LOG = Logger.getLogger(Headers.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Headers.class);
 
     public Request toRequest(HttpRequest apacheRequest) {
         return new RequestBuilder()
@@ -36,7 +37,7 @@ public class RequestConverter {
             HttpEntityEnclosingRequest entityRequest = (HttpEntityEnclosingRequest) request;
             return EntityUtils.toString(entityRequest.getEntity());
         } catch (ClassCastException e) {
-            LOG.info("apache request does not have a body available", e);
+            LOG.debug("apache request does not have a body available", e);
             return "";
         } catch (IOException e) {
             throw new UncheckedIOException(e);

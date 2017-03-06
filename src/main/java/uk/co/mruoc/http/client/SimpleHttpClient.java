@@ -7,7 +7,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -21,7 +22,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 public class SimpleHttpClient extends BaseHttpClient {
 
     private static final String DEFAULT_ENCODING = "utf-8";
-    private static final Logger LOG = Logger.getLogger(SimpleHttpClient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleHttpClient.class);
 
     private final ResponseConverter converter = new ResponseConverter();
     private final HttpClient client;
@@ -62,7 +63,7 @@ public class SimpleHttpClient extends BaseHttpClient {
         try {
             URI uri = request.getURI();
             LOG.info("performing " + request.getMethod() + " on uri " + uri.toString());
-            LOG.info("decoded uri is " + URLDecoder.decode(uri.toString(), DEFAULT_ENCODING));
+            LOG.debug("decoded uri is " + URLDecoder.decode(uri.toString(), DEFAULT_ENCODING));
             HttpResponse rawResponse = client.execute(request);
             Response response = converter.toResponse(rawResponse);
             log(response);
@@ -82,7 +83,7 @@ public class SimpleHttpClient extends BaseHttpClient {
 
     private void logHeaders(Response response) {
         Collection<String> headersKeys = response.getHeaderKeys();
-        headersKeys.forEach(h -> LOG.info("response header " + h + " with value " + response.getHeader(h)));
+        headersKeys.forEach(h -> LOG.debug("response header " + h + " with value " + response.getHeader(h)));
     }
 
     private HttpPost createPost(String endpoint, String entity, Headers headers) {

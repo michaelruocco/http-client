@@ -1,7 +1,8 @@
 package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpMessage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 public class Headers {
 
-    private static final Logger LOG = Logger.getLogger(Headers.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Headers.class);
 
     private final Map<String, String> values = new HashMap<>();
 
@@ -51,11 +52,11 @@ public class Headers {
 
     private void logOverwriteMessage(String name, String value) {
         String oldValue = get(name);
-        LOG.info("header " + name + " value " + oldValue + " being replaced with " + value);
+        LOG.debug("header " + name + " value " + oldValue + " being replaced with " + value);
     }
 
     private void logAddMessage(String name, String value) {
-        LOG.info("adding header " + name + " with value " + value);
+        LOG.debug("adding header " + name + " with value " + value);
     }
 
     public static class HeaderNotFoundException extends RuntimeException {
