@@ -16,6 +16,7 @@ import java.net.URI;
 import java.net.URLDecoder;
 import java.util.Collection;
 
+import static java.net.URLDecoder.decode;
 import static org.apache.http.HttpHeaders.ACCEPT;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
@@ -62,8 +63,8 @@ public class SimpleHttpClient extends BaseHttpClient {
     protected Response execute(HttpRequestBase request) {
         try {
             URI uri = request.getURI();
-            LOG.info("performing " + request.getMethod() + " on uri " + uri.toString());
-            LOG.debug("decoded uri is " + URLDecoder.decode(uri.toString(), DEFAULT_ENCODING));
+            LOG.info("performing " + request.getMethod() + " on uri " + decode(uri.toString(), DEFAULT_ENCODING));
+            LOG.debug("encoded uri is " + uri.toString());
             HttpResponse rawResponse = client.execute(request);
             Response response = converter.toResponse(rawResponse);
             log(response);
