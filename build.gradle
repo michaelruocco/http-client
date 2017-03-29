@@ -76,7 +76,7 @@ uploadArchives {
                 description 'Code library to enable easy interaction with restful json apis'
                 groupId 'com.github.michaelruocco'
                 artifactId 'http-client'
-                version '3.0.1'
+                version '3.0.2'
                 url 'https://github.com/michaelruocco/http-client'
 
                 developers {
