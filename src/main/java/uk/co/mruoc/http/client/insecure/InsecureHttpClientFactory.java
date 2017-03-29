@@ -4,14 +4,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.ssl.SSLContexts;
-import uk.co.mruoc.http.client.SimpleHttpClient;
 
 import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
-public class InsecureHttpClientFactory extends SimpleHttpClient {
+public class InsecureHttpClientFactory {
 
     public static HttpClient build() {
         SSLContext sslContext = buildSslContext();
