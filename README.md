@@ -15,9 +15,11 @@ gradle you would do this by adding the following to your build.gradle file:
 
 ```
 dependencies {
-    compile 'com.github.michaelruocco:http-client:3.0.2'
+    compile 'com.github.michaelruocco:http-client:3.0.3'
 }
 ```
+
+### Basic Usage
 
 You can then create and instance of the SimpleHttpClient class to perform
 RESTful api calls e.g.
@@ -44,7 +46,20 @@ headers.add("Custom-Header", "Value");
 Response response = client.get("http://localhost:8080/testEndpoint", headers);
 ```
 
-### Testing
+### Bypassing / Disabling SSL
+
+For testing purposes it is sometimes preferable to diasble SSL when making http calls
+if you don't want to have to package up a truststore with projects. To do this you
+can create an instance of InsecureSimpleHttpClient. It is only recommended that you do
+this when testing, and never in a production system.
+
+```
+HttpClient client = new InsecureSimpleHttpClient();
+
+...
+```
+
+## Testing
 
 When testing you can make use of the FakeGttpClient, this allows you to set
 up canned responses as well as inspect any requests set into it. To test a
