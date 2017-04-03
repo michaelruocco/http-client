@@ -17,7 +17,15 @@ public class Headers {
     }
 
     public Headers(HttpMessage message) {
-        Arrays.stream(message.getAllHeaders()).forEach(h -> add(h.getName(), h.getValue()));
+        addHeaders(message);
+    }
+
+    public void addHeaders(HttpMessage message) {
+        addHeaders(message.getAllHeaders());
+    }
+
+    public void addHeaders(org.apache.http.Header... headers) {
+        Arrays.stream(headers).forEach(h -> add(h.getName(), h.getValue()));
     }
 
     public void add(String name, String value) {
@@ -37,6 +45,10 @@ public class Headers {
 
     public Collection<String> getNames() {
         return values.keySet();
+    }
+
+    public int size() {
+        return values.size();
     }
 
     private void logAddHeader(String name, String value) {
