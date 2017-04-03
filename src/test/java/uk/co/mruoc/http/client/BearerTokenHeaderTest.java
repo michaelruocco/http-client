@@ -17,7 +17,7 @@ public class BearerTokenHeaderTest {
     }
 
     @Test
-    public void shouldPrefixTokenWithBearer() {
+    public void shouldPrefixTokenValueWithBearer() {
         assertThat(header.getValue()).isEqualTo("Bearer " + TOKEN);
     }
 
