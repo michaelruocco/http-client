@@ -20,5 +20,5 @@ public class BasicHeaderTest {
     public void shouldReturnValue() {
         assertThat(header.getValue()).isEqualTo(VALUE);
     }
-    
+
 }
