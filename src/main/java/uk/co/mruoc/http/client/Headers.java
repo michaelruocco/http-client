@@ -59,12 +59,4 @@ public class Headers {
         LOG.debug("adding header " + name + " with value " + value);
     }
 
-    public static class HeaderNotFoundException extends RuntimeException {
-
-        public HeaderNotFoundException(String headerName) {
-            super(headerName);
-        }
-
-    }
-
 }
