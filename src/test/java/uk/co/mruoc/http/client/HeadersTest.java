@@ -84,6 +84,15 @@ public class HeadersTest {
         assertThat(newHeaders.get(apacheHeaders[1].getName())).isEqualTo(apacheHeaders[1].getValue());
     }
 
+    @Test
+    public void shouldAddCustomBasicHeader() {
+        Header header = new BasicHeader("custom-name", "custom-value");
+
+        headers.add(header);
+
+        assertThat(headers.get(header.getName())).isEqualTo(header.getValue());
+    }
+
     private org.apache.http.Header[] givenHttpMessageWillReturnHeaders() {
         org.apache.http.Header[] headers = buildApacheHeaders();
         given(httpMessage.getAllHeaders()).willReturn(headers);

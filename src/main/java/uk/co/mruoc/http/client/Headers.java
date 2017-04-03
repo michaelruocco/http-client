@@ -28,6 +28,10 @@ public class Headers {
         Arrays.stream(headers).forEach(h -> add(h.getName(), h.getValue()));
     }
 
+    public void add(Header header) {
+        add(header.getName(), header.getValue());
+    }
+
     public void add(String name, String value) {
         logAddHeader(name, value);
         values.put(name, value);
