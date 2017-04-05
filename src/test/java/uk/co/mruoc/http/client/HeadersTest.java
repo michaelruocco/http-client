@@ -100,13 +100,9 @@ public class HeadersTest {
     }
 
     private static org.apache.http.Header[] buildApacheHeaders() {
-        org.apache.http.Header header1 = buildApacheHeader("headerName1", "headerValue1");
-        org.apache.http.Header header2 = buildApacheHeader("headerName2", "headerValue2");
+        org.apache.http.Header header1 = ApacheHeaderBuilder.build("headerName1", "headerValue1");
+        org.apache.http.Header header2 = ApacheHeaderBuilder.build("headerName2", "headerValue2");
         return new org.apache.http.Header[] { header1, header2 };
-    }
-
-    private static org.apache.http.Header buildApacheHeader(String name, String value) {
-        return new org.apache.http.message.BasicHeader(name, value);
     }
 
 }

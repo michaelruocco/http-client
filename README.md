@@ -36,6 +36,8 @@ Response putResponse = client.put("http://localhost:8080/testEndpoint", "{ json:
 Response deleteResponse = client.delete("http://localhost:8080/testEndpoint");
 ```
 
+### Setting Headers
+
 For each of the calls you can also pass headers if you wish, e.g:
 
 ```
@@ -45,6 +47,23 @@ headers.add("Custom-Header", "Value");
 
 Response response = client.get("http://localhost:8080/testEndpoint", headers);
 ```
+
+If you would rather encapsulate the header name values you can also use some of the
+default header implementations for common headers such as authorization bearer token
+and content type:
+
+```
+HttpClient client = new SimpleHttpClient();
+Headers headers = new Headers();
+headers.add(new BearerTokenHeader("my-token-value"));
+headers.add(new ContentTypeHeader("application/json"));
+
+Response response = client.get("http://localhost:8080/testEndpoint", headers);
+```
+
+These examples all extend BasicHeader, if you want to add others you can extend
+BasicHeader to create your own header types. If you would rather not maintain these
+yourself then you can create a pull request and commit them back into the project.
 
 ### Bypassing / Disabling SSL
 

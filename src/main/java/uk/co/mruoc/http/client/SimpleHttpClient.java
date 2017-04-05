@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URI;
-import java.net.URLDecoder;
 import java.util.Collection;
 
 import static java.net.URLDecoder.decode;
