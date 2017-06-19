@@ -28,7 +28,11 @@ public class SimpleHttpClient extends BaseHttpClient {
     private final HttpClient client;
 
     public SimpleHttpClient() {
-        this(HttpClientBuilder.create().build());
+        this(ApacheHttpClientFactory.build());
+    }
+
+    public SimpleHttpClient(int httpTimeout) {
+        this(ApacheHttpClientFactory.build(httpTimeout));
     }
 
     public SimpleHttpClient(HttpClient client) {
