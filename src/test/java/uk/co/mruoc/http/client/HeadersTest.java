@@ -93,6 +93,20 @@ public class HeadersTest {
         assertThat(headers.get(header.getName())).isEqualTo(header.getValue());
     }
 
+    @Test
+    public void shouldReturnFalseIfDoesNotContainHeader() {
+        assertThat(headers.contains("custom-name")).isFalse();
+    }
+
+    @Test
+    public void shouldReturnTrueIfContainsHeader() {
+        Header header = new BasicHeader("custom-name", "custom-value");
+
+        headers.add(header);
+
+        assertThat(headers.contains(header.getName())).isTrue();
+    }
+
     private org.apache.http.Header[] givenHttpMessageWillReturnHeaders() {
         org.apache.http.Header[] headers = buildApacheHeaders();
         given(httpMessage.getAllHeaders()).willReturn(headers);
