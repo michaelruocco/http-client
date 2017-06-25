@@ -58,7 +58,7 @@ public class Headers {
     public boolean contains(String headerName) {
         return values.containsKey(headerName);
     }
-    
+
     private void logAddHeader(String name, String value) {
         if (headerExists(name)) {
             logOverwriteMessage(name, value);
