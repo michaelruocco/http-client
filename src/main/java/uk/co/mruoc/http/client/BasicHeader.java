@@ -5,6 +5,10 @@ public class BasicHeader implements Header {
     private final String name;
     private final String value;
 
+    public BasicHeader(HeaderName name, String value) {
+        this(name.get(), value);
+    }
+
     public BasicHeader(String name, String value) {
         this.name = name;
         this.value = value;

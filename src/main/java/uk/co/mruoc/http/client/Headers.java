@@ -6,6 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+import static uk.co.mruoc.http.client.HeaderName.*;
+import static uk.co.mruoc.http.client.HeaderName.BEARER_TOKEN;
+import static uk.co.mruoc.http.client.HeaderName.JWT_ASSERTION;
+
 public class Headers {
 
     private static final Logger LOG = LoggerFactory.getLogger(Headers.class);
@@ -57,6 +61,72 @@ public class Headers {
 
     public boolean contains(String headerName) {
         return values.containsKey(headerName);
+    }
+
+    public void addBearerToken(String token) {
+        Header header = new BearerTokenHeader(token);
+        add(header);
+    }
+
+    public String getBearerToken() {
+        return get(BEARER_TOKEN.get());
+    }
+
+    public boolean hasBearerToken() {
+        return contains(BEARER_TOKEN.get());
+    }
+
+    public void addJwtAssertion(String application) {
+        Header header = new JwtAssertionHeader(application);
+        add(header);
+    }
+
+    public String getJwtAssertion() {
+        return get(JWT_ASSERTION.get());
+    }
+
+    public boolean hasJwtAssertion() {
+        return contains(JWT_ASSERTION.get());
+    }
+
+    public void addContentType(String contentType) {
+        Header header = new ContentTypeHeader(contentType);
+        add(header);
+    }
+
+    public String getContentType() {
+        return get(CONTENT_TYPE.get());
+    }
+
+    public boolean hasContentType() {
+        return contains(CONTENT_TYPE.get());
+    }
+
+    public void addAccept(String contentType) {
+        Header header = new AcceptHeader(contentType);
+        add(header);
+    }
+
+    public String getAccept() {
+        return get(ACCEPT.get());
+    }
+
+
+    public boolean hasAccept() {
+        return contains(ACCEPT.get());
+    }
+
+    public void addAuthToken(String token) {
+        Header header = new AuthTokenHeader(token);
+        add(header);
+    }
+
+    public String getAuthToken() {
+        return get(AUTH_TOKEN.get());
+    }
+
+    public boolean hasAuthToken() {
+        return contains(AUTH_TOKEN.get());
     }
 
     private void logAddHeader(String name, String value) {

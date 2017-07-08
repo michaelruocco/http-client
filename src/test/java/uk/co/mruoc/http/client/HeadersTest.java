@@ -107,6 +107,121 @@ public class HeadersTest {
         assertThat(headers.contains(header.getName())).isTrue();
     }
 
+    @Test
+    public void shouldAddBearerToken() {
+        String token = "my-token";
+
+        headers.addBearerToken(token);
+
+        assertThat(headers.getBearerToken()).isEqualTo("Bearer " + token);
+    }
+
+    @Test
+    public void shouldNotHaveBearerTokenByDefault() {
+        assertThat(headers.hasBearerToken()).isFalse();
+    }
+
+    @Test
+    public void shouldHaveBearerTokenIfSet() {
+        String token = "my-token";
+
+        headers.addBearerToken(token);
+
+        assertThat(headers.hasBearerToken()).isTrue();
+    }
+
+    @Test
+    public void shouldAddJwtAssertion() {
+        String application = "my-application";
+
+        headers.addJwtAssertion(application);
+
+        assertThat(headers.getJwtAssertion()).isEqualTo(application);
+    }
+
+    @Test
+    public void shouldNotHaveJwtAssertionByDefault() {
+        assertThat(headers.hasJwtAssertion()).isFalse();
+    }
+
+    @Test
+    public void shouldHaveJwtAssertionIfSet() {
+        String application = "my-application";
+
+        headers.addJwtAssertion(application);
+
+        assertThat(headers.hasJwtAssertion()).isTrue();
+    }
+
+    @Test
+    public void shouldAddContentType() {
+        String contentType = "application/json";
+
+        headers.addContentType(contentType);
+
+        assertThat(headers.getContentType()).isEqualTo(contentType);
+    }
+
+    @Test
+    public void shouldNotHaveContentTypeByDefault() {
+        assertThat(headers.hasContentType()).isFalse();
+    }
+
+    @Test
+    public void shouldHaveContentTypeIfSet() {
+        String contentType = "application/json";
+
+        headers.addContentType(contentType);
+
+        assertThat(headers.hasContentType()).isTrue();
+    }
+
+    @Test
+    public void shouldAddAccept() {
+        String accept = "application/json";
+
+        headers.addAccept(accept);
+
+        assertThat(headers.getAccept()).isEqualTo(accept);
+    }
+
+    @Test
+    public void shouldNotHaveAcceptByDefault() {
+        assertThat(headers.hasAccept()).isFalse();
+    }
+
+    @Test
+    public void shouldHaveAcceptIfSet() {
+        String accept = "application/json";
+
+        headers.addAccept(accept);
+
+        assertThat(headers.hasAccept()).isTrue();
+    }
+
+    @Test
+    public void shouldAddAuthToken() {
+        String authToken = "my-token";
+
+        headers.addAuthToken(authToken);
+
+        assertThat(headers.getAuthToken()).isEqualTo(authToken);
+    }
+
+    @Test
+    public void shouldNotHaveAuthTokenByDefault() {
+        assertThat(headers.hasAuthToken()).isFalse();
+    }
+
+    @Test
+    public void shouldHaveAuthTokenIfSet() {
+        String authToken = "my-token";
+
+        headers.addAuthToken(authToken);
+
+        assertThat(headers.hasAuthToken()).isTrue();
+    }
+
     private org.apache.http.Header[] givenHttpMessageWillReturnHeaders() {
         org.apache.http.Header[] headers = buildApacheHeaders();
         given(httpMessage.getAllHeaders()).willReturn(headers);
