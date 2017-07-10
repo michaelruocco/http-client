@@ -30,6 +30,30 @@ public class Response {
         return headers.getNames();
     }
 
+    public boolean is1xx() {
+        return statusBetween(99, 200);
+    }
+
+    public boolean is2xx() {
+        return statusBetween(199, 300);
+    }
+
+    public boolean is3xx() {
+        return statusBetween(299, 400);
+    }
+
+    public boolean is4xx() {
+        return statusBetween(399, 500);
+    }
+
+    public boolean is5xx() {
+        return statusBetween(499, 600);
+    }
+
+    private boolean statusBetween(int start, int end) {
+        return statusCode > start && statusCode < end;
+    }
+
     public static class ResponseBuilder {
 
         private int statusCode;
