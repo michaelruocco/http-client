@@ -7,6 +7,7 @@ public enum HeaderName {
     AUTH_TOKEN("X-Auth-Token"),
     JWT_ASSERTION("X-JWT-Assertion"),
     BEARER_TOKEN(HttpHeaders.AUTHORIZATION),
+    BASIC_AUTH(HttpHeaders.AUTHORIZATION),
     ACCEPT(HttpHeaders.ACCEPT),
     CONTENT_TYPE(HttpHeaders.CONTENT_TYPE);
 

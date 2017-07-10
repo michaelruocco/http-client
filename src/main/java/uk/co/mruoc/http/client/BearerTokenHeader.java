@@ -1,7 +1,5 @@
 package uk.co.mruoc.http.client;
 
-import org.apache.http.HttpHeaders;
-
 public class BearerTokenHeader extends BasicHeader {
 
     public BearerTokenHeader(String token) {

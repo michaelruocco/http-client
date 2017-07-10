@@ -222,6 +222,29 @@ public class HeadersTest {
         assertThat(headers.hasAuthToken()).isTrue();
     }
 
+    @Test
+    public void shouldAddBasicAuth() {
+        String authToken = "my-token";
+
+        headers.addBasicAuth(authToken);
+
+        assertThat(headers.getBasicAuth()).isEqualTo("Basic " + authToken);
+    }
+
+    @Test
+    public void shouldNotHaveBasicAuthByDefault() {
+        assertThat(headers.hasBasicAuth()).isFalse();
+    }
+
+    @Test
+    public void shouldHaveBasicAuthIfSet() {
+        String authToken = "my-token";
+
+        headers.addBasicAuth(authToken);
+
+        assertThat(headers.hasBasicAuth()).isTrue();
+    }
+
     private org.apache.http.Header[] givenHttpMessageWillReturnHeaders() {
         org.apache.http.Header[] headers = buildApacheHeaders();
         given(httpMessage.getAllHeaders()).willReturn(headers);

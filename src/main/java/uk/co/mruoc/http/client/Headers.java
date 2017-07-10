@@ -116,6 +116,19 @@ public class Headers {
         return contains(ACCEPT.get());
     }
 
+    public void addBasicAuth(String token) {
+        Header header = new BasicAuthHeader(token);
+        add(header);
+    }
+
+    public String getBasicAuth() {
+        return get(BASIC_AUTH.get());
+    }
+
+    public boolean hasBasicAuth() {
+        return contains(BASIC_AUTH.get());
+    }
+
     public void addAuthToken(String token) {
         Header header = new AuthTokenHeader(token);
         add(header);
