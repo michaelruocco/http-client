@@ -15,7 +15,7 @@ gradle you would do this by adding the following to your build.gradle file:
 
 ```
 dependencies {
-    compile 'com.github.michaelruocco:http-client:3.0.9'
+    compile 'com.github.michaelruocco:http-client:3.0.10'
 }
 ```
 
