@@ -80,7 +80,7 @@ HttpClient client = new InsecureSimpleHttpClient();
 
 ## Testing
 
-When testing you can make use of the FakeGttpClient, this allows you to set
+When testing you can make use of the FakeHttpClient, this allows you to set
 up canned responses as well as inspect any requests set into it. To test a
 simple PUT request we can use the fake client to assert on the request body:
 
