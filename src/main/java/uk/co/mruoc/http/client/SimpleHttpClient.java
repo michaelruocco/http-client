@@ -1,31 +1,25 @@
 package uk.co.mruoc.http.client;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collection;
 
 import static java.net.URLDecoder.decode;
-import static org.apache.http.HttpHeaders.ACCEPT;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
-public class SimpleHttpClient extends BaseHttpClient {
+public class SimpleHttpClient extends AbstractSimpleHttpClient {
 
     private static final String DEFAULT_ENCODING = "utf-8";
     private static final Logger LOG = LoggerFactory.getLogger(SimpleHttpClient.class);
 
-    private final ResponseConverter converter = new ResponseConverter();
-    private final HttpClient client;
+    private final BodyExtractor bodyExtractor = new BodyExtractor();
 
     public SimpleHttpClient() {
         this(ApacheHttpClientFactory.build());
@@ -36,53 +30,33 @@ public class SimpleHttpClient extends BaseHttpClient {
     }
 
     public SimpleHttpClient(HttpClient client) {
-        this.client = client;
+        super(client);
     }
 
     @Override
-    public Response post(String endpoint, String entity, Headers headers) {
-        HttpPost post = createPost(endpoint, entity, headers);
-        return execute(post);
-    }
-
-    @Override
-    public Response put(String endpoint, String entity, Headers headers) {
-        HttpPut put = createPut(endpoint, entity, headers);
-        return execute(put);
-    }
-
-    @Override
-    public Response get(String endpoint, Headers headers) {
-        HttpGet get = createGet(endpoint, headers);
-        return execute(get);
-    }
-
-    @Override
-    public Response delete(String endpoint, Headers headers) {
-        HttpDelete delete = createDelete(endpoint, headers);
-        return execute(delete);
-    }
-
-    protected Response execute(HttpRequestBase request) {
+    protected void log(HttpRequestBase request) {
         try {
             URI uri = request.getURI();
-            LOG.info("performing " + request.getMethod() + " on uri " + decode(uri.toString(), DEFAULT_ENCODING));
+            LOG.info("performing " + request.getMethod() + " on uri " + decode(uri.toString(), DEFAULT_ENCODING) + " with body " + request);
             LOG.debug("encoded uri is " + uri.toString());
-            HttpResponse rawResponse = client.execute(request);
-            Response response = converter.toResponse(rawResponse);
-            log(response);
-            return response;
+            logBody(request);
+            logHeaders(request);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
-        } finally {
-            request.releaseConnection();
         }
     }
 
-    private void log(Response response) {
-        LOG.info("status code " + response.getStatusCode());
-        LOG.info("body " + response.getBody());
+    @Override
+    protected void log(Response response) {
+        LOG.info("response status code " + response.getStatusCode());
+        LOG.info("response body " + response.getBody());
         logHeaders(response);
+    }
+
+    private void logBody(HttpRequest request) throws IOException {
+        String body = bodyExtractor.extract(request);
+        if (!body.isEmpty())
+            LOG.info("request body " + body);
     }
 
     private void logHeaders(Response response) {
@@ -90,41 +64,9 @@ public class SimpleHttpClient extends BaseHttpClient {
         headersKeys.forEach(h -> LOG.debug("response header " + h + " with value " + response.getHeader(h)));
     }
 
-    private HttpPost createPost(String endpoint, String entity, Headers headers) {
-        HttpPost post = new HttpPost(endpoint);
-        post.setEntity(toJsonEntity(entity));
-        addHeaders(post, headers);
-        return post;
-    }
-
-    private HttpPut createPut(String endpoint, String entity, Headers headers) {
-        HttpPut put = new HttpPut(endpoint);
-        put.setEntity(toJsonEntity(entity));
-        addHeaders(put, headers);
-        return put;
-    }
-
-    private HttpGet createGet(String endpoint, Headers headers) {
-        HttpGet get = new HttpGet(endpoint);
-        headers.add(ACCEPT, APPLICATION_JSON.getMimeType());
-        addHeaders(get, headers);
-        return get;
-    }
-
-    private HttpDelete createDelete(String endpoint, Headers headers) {
-        HttpDelete delete = new HttpDelete(endpoint);
-        addHeaders(delete, headers);
-        return delete;
-    }
-
-    private void addHeaders(HttpRequest request, Headers headers) {
-        for (String name : headers.getNames())
-            request.setHeader(name, headers.get(name));
-    }
-
-    private HttpEntity toJsonEntity(String entity) {
-        LOG.info("creating entity using json " + entity);
-        return new StringEntity(entity, APPLICATION_JSON);
+    private void logHeaders(HttpRequest request) {
+        Collection<org.apache.http.Header> headers = Arrays.asList(request.getAllHeaders());
+        headers.forEach(header -> LOG.debug("response header " + header.getName() + " with value " + header.getValue()));
     }
 
 }
