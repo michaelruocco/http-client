@@ -37,7 +37,7 @@ public class SimpleHttpClient extends AbstractSimpleHttpClient {
     protected void log(HttpRequestBase request) {
         try {
             URI uri = request.getURI();
-            LOG.info("performing " + request.getMethod() + " on uri " + decode(uri.toString(), DEFAULT_ENCODING) + " with body " + request);
+            LOG.info("performing " + request.getMethod() + " on uri " + decode(uri.toString(), DEFAULT_ENCODING));
             LOG.debug("encoded uri is " + uri.toString());
             logBody(request);
             logHeaders(request);
@@ -59,14 +59,16 @@ public class SimpleHttpClient extends AbstractSimpleHttpClient {
             LOG.info("request body " + body);
     }
 
+    private void logHeaders(HttpRequest request) {
+        Collection<org.apache.http.Header> headers = Arrays.asList(request.getAllHeaders());
+        headers.forEach(header -> LOG.debug("response header " + header.getName() + " with value " + header.getValue()));
+    }
+
     private void logHeaders(Response response) {
         Collection<String> headersKeys = response.getHeaderKeys();
         headersKeys.forEach(h -> LOG.debug("response header " + h + " with value " + response.getHeader(h)));
     }
 
-    private void logHeaders(HttpRequest request) {
-        Collection<org.apache.http.Header> headers = Arrays.asList(request.getAllHeaders());
-        headers.forEach(header -> LOG.debug("response header " + header.getName() + " with value " + header.getValue()));
-    }
+
 
 }

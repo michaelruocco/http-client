@@ -1,8 +1,6 @@
 package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -11,8 +9,6 @@ import static uk.co.mruoc.http.client.HeaderName.BEARER_TOKEN;
 import static uk.co.mruoc.http.client.HeaderName.JWT_ASSERTION;
 
 public class Headers {
-
-    private static final Logger LOG = LoggerFactory.getLogger(Headers.class);
 
     private final Map<String, String> values = new HashMap<>();
 
@@ -37,7 +33,6 @@ public class Headers {
     }
 
     public void add(String name, String value) {
-        logAddHeader(name, value);
         values.put(name, value);
     }
 
@@ -140,23 +135,6 @@ public class Headers {
 
     public boolean hasAuthToken() {
         return contains(AUTH_TOKEN.get());
-    }
-
-    private void logAddHeader(String name, String value) {
-        if (headerExists(name)) {
-            logOverwriteMessage(name, value);
-        } else {
-            logAddMessage(name, value);
-        }
-    }
-
-    private void logOverwriteMessage(String name, String value) {
-        String oldValue = get(name);
-        LOG.debug("header " + name + " value " + oldValue + " being replaced with " + value);
-    }
-
-    private void logAddMessage(String name, String value) {
-        LOG.debug("adding header " + name + " with value " + value);
     }
 
 }
