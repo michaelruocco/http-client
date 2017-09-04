@@ -71,23 +71,6 @@ public abstract class AbstractSimpleHttpClient extends BaseHttpClient {
 
     protected abstract void log(Response response);
 
-    /*private void log(HttpRequestBase request) {
-        URI uri = request.getURI();
-        LOG.info("performing " + request.getMethod() + " on uri " + decode(uri.toString(), DEFAULT_ENCODING));
-        LOG.debug("encoded uri is " + uri.toString());
-    }
-
-    private void log(Response response) {
-        LOG.info("status code " + response.getStatusCode());
-        LOG.info("body " + response.getBody());
-        logHeaders(response);
-    }
-
-    private void logHeaders(Response response) {
-        Collection<String> headersKeys = response.getHeaderKeys();
-        headersKeys.forEach(h -> LOG.debug("response header " + h + " with value " + response.getHeader(h)));
-    }*/
-
     private HttpPost createPost(String endpoint, String entity, Headers headers) {
         HttpPost post = new HttpPost(endpoint);
         post.setEntity(toJsonEntity(entity));
