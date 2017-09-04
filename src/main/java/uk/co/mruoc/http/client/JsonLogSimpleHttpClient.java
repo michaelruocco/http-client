@@ -24,8 +24,6 @@ public class JsonLogSimpleHttpClient extends AbstractSimpleHttpClient {
     private static final String DEFAULT_ENCODING = "utf-8";
     private static final Logger LOG = LoggerFactory.getLogger(JsonLogSimpleHttpClient.class);
 
-    private final BodyExtractor bodyExtractor = new BodyExtractor();
-
     public JsonLogSimpleHttpClient() {
         this(ApacheHttpClientFactory.build());
     }
