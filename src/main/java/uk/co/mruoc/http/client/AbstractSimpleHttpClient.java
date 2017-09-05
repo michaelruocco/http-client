@@ -56,6 +56,7 @@ public abstract class AbstractSimpleHttpClient extends BaseHttpClient {
 
     protected Response execute(HttpRequestBase request) {
         try {
+            log(request);
             HttpResponse rawResponse = client.execute(request);
             Response response = converter.toResponse(rawResponse);
             log(response);
