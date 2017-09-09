@@ -49,6 +49,15 @@ public class ResponseTest {
     }
 
     @Test
+    public void shouldReturnHeaders() {
+        Headers headers = new Headers();
+
+        Response response = builder.setHeaders(headers).build();
+
+        assertThat(response.getHeaders()).isEqualTo(headers);
+    }
+
+    @Test
     public void shouldBeInOneHundredRange() {
         assertThat(responseWithStatusCode(99).is1xx()).isFalse();
 

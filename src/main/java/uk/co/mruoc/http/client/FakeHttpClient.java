@@ -34,6 +34,9 @@ public class FakeHttpClient extends SimpleHttpClient {
         return fakeHttp.lastRequestHeader(name);
     }
 
+    public Request lastRequest() {
+        return fakeHttp.lastRequest();
+    }
 
     public String lastRequestUri() {
         return fakeHttp.lastRequestUri();
@@ -49,6 +52,10 @@ public class FakeHttpClient extends SimpleHttpClient {
 
     public void cannedResponse(int status, String entity, Headers headers) {
         fakeHttp.cannedResponse(status, entity, headers);
+    }
+
+    public void cannedResponse(Response response) {
+        fakeHttp.cannedResponse(response.getStatusCode(), response.getBody(), response.getHeaders());
     }
 
     public void throwsException(RuntimeException exception) {

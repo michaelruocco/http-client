@@ -2,6 +2,7 @@ package uk.co.mruoc.http.client;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.co.mruoc.http.client.Response.ResponseBuilder;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -103,7 +104,9 @@ public class FakeHttpClientTest {
     public void returnsCannedResponseHeaders() {
         Headers headers = new Headers();
         headers.add("Response-Header", "responseHeaderValue");
+
         client.cannedResponse(201, "CannedBody", headers);
+
         assertThat(client.get(ENDPOINT).getHeader("Response-Header")).isEqualTo("responseHeaderValue");
     }
 
@@ -126,6 +129,37 @@ public class FakeHttpClientTest {
         client.throwsIoException();
 
         client.get("dummy-endpoint");
+    }
+
+    @Test
+    public void usingResponseReturnsCannedResponseStatusCode() {
+        int statusCode = 201;
+        Response response = new ResponseBuilder().setStatusCode(statusCode).build();
+
+        client.cannedResponse(response);
+
+        assertThat(client.get(ENDPOINT).getStatusCode()).isEqualTo(statusCode);
+    }
+
+    @Test
+    public void usingResponseReturnsCannedResponseBody() {
+        String body = "body";
+        Response response = new ResponseBuilder().setBody(body).build();
+
+        client.cannedResponse(response);
+
+        assertThat(client.get(ENDPOINT).getBody()).isEqualTo(body);
+    }
+
+    @Test
+    public void usingResponseReturnsCannedResponseHeaders() {
+        Headers headers = new Headers();
+        headers.add("Response-Header", "responseHeaderValue");
+        Response response = new ResponseBuilder().setHeaders(headers).build();
+
+        client.cannedResponse(response);
+
+        assertThat(client.get(ENDPOINT).getHeader("Response-Header")).isEqualTo("responseHeaderValue");
     }
 
 }

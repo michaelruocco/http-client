@@ -30,6 +30,10 @@ public class Response {
         return headers.getNames();
     }
 
+    public Headers getHeaders() {
+        return headers;
+    }
+
     public boolean is1xx() {
         return statusBetween(99, 200);
     }
@@ -57,8 +61,8 @@ public class Response {
     public static class ResponseBuilder {
 
         private int statusCode;
-        private String body;
-        private Headers headers;
+        private String body = "";
+        private Headers headers = new Headers();
 
         public ResponseBuilder setStatusCode(int statusCode) {
             this.statusCode = statusCode;
