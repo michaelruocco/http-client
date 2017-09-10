@@ -1,76 +1,33 @@
 package uk.co.mruoc.http.client;
 
-import org.apache.http.client.methods.HttpRequestBase;
-
 import java.util.List;
 
-public class FakeHttpClient extends SimpleHttpClient {
+public interface FakeHttpClient extends HttpClient {
 
-    private RuntimeException exception;
-    private FakeApacheHttpClient fakeHttp;
+    List<Request> allRequests();
 
-    public FakeHttpClient() {
-        this(new FakeApacheHttpClient());
-    }
+    Method lastRequestMethod();
 
-    private FakeHttpClient(FakeApacheHttpClient fakeHttp) {
-        super(fakeHttp);
-        this.fakeHttp = fakeHttp;
-    }
+    String lastRequestBody();
 
-    public List<Request> allRequests() {
-        return fakeHttp.allRequests();
-    }
+    String lastRequestHeader(String name);
 
-    public Method lastRequestMethod() {
-        return fakeHttp.lastRequestMethod();
-    }
+    Headers lastRequestHeaders();
 
-    public String lastRequestBody() {
-        return fakeHttp.lastRequestBody();
-    }
+    Request lastRequest();
 
-    public String lastRequestHeader(String name) {
-        return fakeHttp.lastRequestHeader(name);
-    }
+    String lastRequestUri();
 
-    public Request lastRequest() {
-        return fakeHttp.lastRequest();
-    }
+    void cannedResponse(int status);
 
-    public String lastRequestUri() {
-        return fakeHttp.lastRequestUri();
-    }
+    void cannedResponse(int status, String entity);
 
-    public void cannedResponse(int status) {
-        fakeHttp.cannedResponse(status);
-    }
+    void cannedResponse(int status, String entity, Headers headers);
 
-    public void cannedResponse(int status, String entity) {
-        fakeHttp.cannedResponse(status, entity);
-    }
+    void cannedResponse(Response response);
 
-    public void cannedResponse(int status, String entity, Headers headers) {
-        fakeHttp.cannedResponse(status, entity, headers);
-    }
+    void throwsException(RuntimeException exception);
 
-    public void cannedResponse(Response response) {
-        fakeHttp.cannedResponse(response.getStatusCode(), response.getBody(), response.getHeaders());
-    }
-
-    public void throwsException(RuntimeException exception) {
-        this.exception = exception;
-    }
-
-    public void throwsIoException() {
-        fakeHttp.throwsIoException();
-    }
-
-    @Override
-    protected Response execute(HttpRequestBase request) {
-        if (exception == null)
-            return super.execute(request);
-        throw exception;
-    }
+    void throwsIoException();
 
 }

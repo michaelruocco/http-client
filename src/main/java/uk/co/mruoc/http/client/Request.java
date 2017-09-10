@@ -26,6 +26,10 @@ public class Request {
         return headers.get(key);
     }
 
+    public Headers getHeaders() {
+        return headers;
+    }
+
     public String getRequestUri() {
         return uri;
     }

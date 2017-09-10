@@ -14,7 +14,7 @@ public class FakeHttpClientTest {
 
     private static final String ENDPOINT = "http://localhost:8080/endpoint";
 
-    private final FakeHttpClient client = new FakeHttpClient();
+    private final FakeHttpClient client = new DefaultFakeHttpClient();
 
     @Before
     public void setUp() {
@@ -159,7 +159,7 @@ public class FakeHttpClientTest {
 
         client.cannedResponse(response);
 
-        assertThat(client.get(ENDPOINT).getHeader("Response-Header")).isEqualTo("responseHeaderValue");
+        assertThat(client.get(ENDPOINT).getHeaders().hasSameValues(headers)).isTrue();
     }
 
 }

@@ -106,7 +106,6 @@ public class Headers {
         return get(ACCEPT.get());
     }
 
-
     public boolean hasAccept() {
         return contains(ACCEPT.get());
     }
@@ -135,6 +134,10 @@ public class Headers {
 
     public boolean hasAuthToken() {
         return contains(AUTH_TOKEN.get());
+    }
+
+    public boolean hasSameValues(Headers headers) {
+        return this.values.equals(headers.values);
     }
 
 }

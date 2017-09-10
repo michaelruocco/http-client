@@ -68,6 +68,10 @@ public class FakeApacheHttpClient implements HttpClient {
         return lastRequest().getHeader(name);
     }
 
+    public Headers lastRequestHeaders() {
+        return lastRequest().getHeaders();
+    }
+
     public void throwsIoException() {
         this.throwIo = true;
     }
