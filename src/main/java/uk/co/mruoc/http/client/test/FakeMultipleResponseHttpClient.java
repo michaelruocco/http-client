@@ -1,5 +1,7 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.test;
 
+import uk.co.mruoc.http.client.Headers;
+import uk.co.mruoc.http.client.Response;
 import uk.co.mruoc.http.client.Response.ResponseBuilder;
 
 import java.util.ArrayDeque;

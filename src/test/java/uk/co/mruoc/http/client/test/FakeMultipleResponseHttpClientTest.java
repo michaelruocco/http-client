@@ -1,6 +1,8 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.test;
 
 import org.junit.Test;
+import uk.co.mruoc.http.client.Headers;
+import uk.co.mruoc.http.client.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;

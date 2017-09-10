@@ -1,4 +1,6 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.test;
+
+import uk.co.mruoc.http.client.*;
 
 import java.util.List;
 

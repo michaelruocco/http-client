@@ -1,4 +1,4 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.test;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
@@ -14,6 +14,7 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
+import uk.co.mruoc.http.client.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

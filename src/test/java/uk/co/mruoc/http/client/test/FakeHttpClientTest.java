@@ -1,7 +1,9 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.test;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.co.mruoc.http.client.Headers;
+import uk.co.mruoc.http.client.Response;
 import uk.co.mruoc.http.client.Response.ResponseBuilder;
 
 import java.io.IOException;

@@ -1,6 +1,7 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.test;
 
 import org.apache.http.client.methods.HttpRequestBase;
+import uk.co.mruoc.http.client.*;
 
 import java.util.List;
 
