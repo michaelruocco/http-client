@@ -41,6 +41,10 @@ public class JsonLogSimpleHttpClient extends AbstractSimpleHttpClient {
         this(client, buildDefaultLogger());
     }
 
+    public JsonLogSimpleHttpClient(Logger logger) {
+        this(ApacheHttpClientFactory.build(), logger);
+    }
+
     public JsonLogSimpleHttpClient(HttpClient client, Logger logger) {
         super(client);
         this.logger = logger;
