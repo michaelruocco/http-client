@@ -22,25 +22,35 @@ import static java.net.URLDecoder.decode;
 public class JsonLogSimpleHttpClient extends AbstractSimpleHttpClient {
 
     private static final String DEFAULT_ENCODING = "utf-8";
-    private static final Logger LOG = LoggerFactory.getLogger(JsonLogSimpleHttpClient.class);
+
+    private final Logger logger;
 
     public JsonLogSimpleHttpClient() {
-        this(ApacheHttpClientFactory.build());
+        this(ApacheHttpClientFactory.build(), buildDefaultLogger());
     }
 
     public JsonLogSimpleHttpClient(int httpTimeout) {
-        this(ApacheHttpClientFactory.build(httpTimeout));
+        this(ApacheHttpClientFactory.build(httpTimeout), buildDefaultLogger());
+    }
+
+    public JsonLogSimpleHttpClient(int httpTimeout, Logger logger) {
+        this(ApacheHttpClientFactory.build(httpTimeout), logger);
     }
 
     public JsonLogSimpleHttpClient(HttpClient client) {
+        this(client, buildDefaultLogger());
+    }
+
+    public JsonLogSimpleHttpClient(HttpClient client, Logger logger) {
         super(client);
+        this.logger = logger;
     }
 
     @Override
     protected void log(HttpRequestBase request) {
         try {
             URI uri = request.getURI();
-            LOG.info().message("making request")
+            logger.info().message("making request")
                     .field("method", request.getMethod())
                     .field("decodedUri", decode(uri.toString(), DEFAULT_ENCODING))
                     .field("encodedUri", uri.toString())
@@ -54,11 +64,15 @@ public class JsonLogSimpleHttpClient extends AbstractSimpleHttpClient {
 
     @Override
     protected void log(Response response) {
-        LOG.info().message("got response")
+        logger.info().message("got response")
                 .field("statusCode", response.getStatusCode())
                 .json("body", new ResponseBodySupplier(response))
                 .field("headers", new ResponseHeaderSupplier(response))
                 .log();
+    }
+
+    private static Logger buildDefaultLogger() {
+        return LoggerFactory.getLogger(JsonLogSimpleHttpClient.class);
     }
 
     private static class ResponseHeaderSupplier implements Supplier<List> {
