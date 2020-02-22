@@ -1,6 +1,5 @@
 plugins {
     id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.10.0'
     id 'com.github.ben-manes.versions' version '0.28.0'
 }
 
@@ -8,7 +7,6 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
-apply plugin: 'com.github.kt3k.coveralls'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -28,10 +26,14 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '3.3.0'
 }
 
+jacoco {
+    toolVersion = '0.8.5'
+}
+
 jacocoTestReport {
     reports {
         xml.enabled = true
-        html.enabled = true
+        html.enabled = false
     }
 }
 
