@@ -24,6 +24,12 @@ public class FakeMultipleResponseRestClient extends DefaultFakeRestClient {
     }
 
     @Override
+    public Response patch(String endpoint, String entity, Headers headers) {
+        super.cannedResponse(responseStack.pop());
+        return super.patch(endpoint, entity, headers);
+    }
+
+    @Override
     public Response get(String endpoint, Headers headers) {
         super.cannedResponse(responseStack.pop());
         return super.get(endpoint, headers);

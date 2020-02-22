@@ -39,6 +39,17 @@ public class FakeMultipleResponseRestClientTest {
     }
 
     @Test
+    public void patchReturnsFakeResponsesInSequence() {
+        client.cannedResponse(200);
+        client.cannedResponse(300);
+        client.cannedResponse(400);
+
+        assertThat(client.patch(ENDPOINT, ENTITY).getStatusCode()).isEqualTo(200);
+        assertThat(client.patch(ENDPOINT, ENTITY).getStatusCode()).isEqualTo(300);
+        assertThat(client.patch(ENDPOINT, ENTITY).getStatusCode()).isEqualTo(400);
+    }
+
+    @Test
     public void postReturnsFakeResponsesInSequence() {
         client.cannedResponse(200);
         client.cannedResponse(300);
@@ -85,9 +96,9 @@ public class FakeMultipleResponseRestClientTest {
 
         client.get(ENDPOINT);
         client.get(ENDPOINT);
-        client.put(ENDPOINT, ENTITY, headers);
+        client.patch(ENDPOINT, ENTITY, headers);
 
-        assertThat(client.lastRequestMethod()).isEqualTo(Method.PUT);
+        assertThat(client.lastRequestMethod()).isEqualTo(Method.PATCH);
         assertThat(client.lastRequestUri()).isEqualTo(ENDPOINT);
         assertThat(client.lastRequestBody()).isEqualTo(ENTITY);
         assertThat(client.lastRequestHeaders().hasSameValues(headers)).isTrue();
