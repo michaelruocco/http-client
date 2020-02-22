@@ -71,7 +71,7 @@ public class FakeApacheHttpClient implements HttpClient {
         return lastRequest().getHeader(name);
     }
 
-    public DefaultHeaders lastRequestHeaders() {
+    public Headers lastRequestHeaders() {
         return lastRequest().getHeaders();
     }
 

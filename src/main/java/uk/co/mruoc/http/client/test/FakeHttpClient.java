@@ -1,7 +1,7 @@
 package uk.co.mruoc.http.client.test;
 
 import uk.co.mruoc.http.client.*;
-import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface FakeHttpClient extends HttpClient {
 
     String lastRequestHeader(String name);
 
-    DefaultHeaders lastRequestHeaders();
+    Headers lastRequestHeaders();
 
     Request lastRequest();
 
@@ -25,7 +25,7 @@ public interface FakeHttpClient extends HttpClient {
 
     void cannedResponse(int status, String entity);
 
-    void cannedResponse(int status, String entity, DefaultHeaders headers);
+    void cannedResponse(int status, String entity, Headers headers);
 
     void cannedResponse(Response response);
 

@@ -54,7 +54,7 @@ public class FakeMultipleResponseHttpClient extends DefaultFakeHttpClient {
     }
 
     @Override
-    public void cannedResponse(int status, String entity, DefaultHeaders headers) {
+    public void cannedResponse(int status, String entity, Headers headers) {
         Response response = new ResponseBuilder()
                 .setStatusCode(status)
                 .setBody(entity)

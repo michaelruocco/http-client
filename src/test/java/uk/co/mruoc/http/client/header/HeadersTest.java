@@ -12,7 +12,7 @@ public class HeadersTest {
 
     private final HttpMessage httpMessage = mock(HttpMessage.class);
 
-    private final DefaultHeaders headers = new DefaultHeaders();
+    private final Headers headers = new DefaultHeaders();
 
     @Test(expected = HeaderNotFoundException.class)
     public void shouldThrowExceptionIfHeaderDoesNotExist() {

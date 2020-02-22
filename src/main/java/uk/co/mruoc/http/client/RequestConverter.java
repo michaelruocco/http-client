@@ -2,15 +2,14 @@ package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpRequest;
 import uk.co.mruoc.http.client.header.DefaultHeaders;
-
-import static uk.co.mruoc.http.client.Request.*;
+import uk.co.mruoc.http.client.header.Headers;
 
 public class RequestConverter {
 
     private final BodyExtractor bodyExtractor = new BodyExtractor();
 
     public Request toRequest(HttpRequest apacheRequest) {
-        return new RequestBuilder()
+        return new Request.RequestBuilder()
                 .setUri(extractUri(apacheRequest))
                 .setMethod(extractMethod(apacheRequest))
                 .setBody(bodyExtractor.extract(apacheRequest))
@@ -26,19 +25,7 @@ public class RequestConverter {
         return Method.valueOf(request.getRequestLine().getMethod());
     }
 
-    /*private static String extractBody(HttpRequest request) {
-        try {
-            HttpEntityEnclosingRequest entityRequest = (HttpEntityEnclosingRequest) request;
-            return EntityUtils.toString(entityRequest.getEntity());
-        } catch (ClassCastException e) {
-            LOG.debug("apache request does not have a body available", e);
-            return "";
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }*/
-
-    private static DefaultHeaders extractHeaders(HttpRequest request) {
+    private static Headers extractHeaders(HttpRequest request) {
         return new DefaultHeaders(request);
     }
 

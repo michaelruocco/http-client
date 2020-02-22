@@ -105,7 +105,7 @@ public class FakeHttpClientTest {
 
     @Test
     public void returnsCannedResponseHeaders() {
-        DefaultHeaders headers = new DefaultHeaders();
+        Headers headers = new DefaultHeaders();
         headers.add("Response-Header", "responseHeaderValue");
 
         client.cannedResponse(201, "CannedBody", headers);
@@ -156,7 +156,7 @@ public class FakeHttpClientTest {
 
     @Test
     public void usingResponseReturnsCannedResponseHeaders() {
-        DefaultHeaders headers = new DefaultHeaders();
+        Headers headers = new DefaultHeaders();
         headers.add("Response-Header", "responseHeaderValue");
         Response response = new ResponseBuilder().setHeaders(headers).build();
 

@@ -14,7 +14,7 @@ public class FakeMultipleResponseHttpClientTest {
     private static final String ENTITY = "the-entity";
 
     private final FakeHttpClient client = new FakeMultipleResponseHttpClient();
-    private final DefaultHeaders headers = new DefaultHeaders();
+    private final Headers headers = new DefaultHeaders();
 
     @Test
     public void getReturnsFakeResponsesInSequence() {
@@ -77,7 +77,7 @@ public class FakeMultipleResponseHttpClientTest {
 
     @Test
     public void recordsAllRequestDetails() {
-        DefaultHeaders headers = new DefaultHeaders();
+        Headers headers = new DefaultHeaders();
         headers.add("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);
@@ -96,7 +96,7 @@ public class FakeMultipleResponseHttpClientTest {
 
     @Test
     public void recordsAllRequestDetailsAsRequest() {
-        DefaultHeaders headers = new DefaultHeaders();
+        Headers headers = new DefaultHeaders();
         headers.add("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);

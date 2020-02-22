@@ -2,20 +2,14 @@ package uk.co.mruoc.http.client.header;
 
 import org.apache.http.HttpHeaders;
 
-public enum CommonHeaderName {
+public class CommonHeaderName {
 
-    AUTHORIZATION(HttpHeaders.AUTHORIZATION),
-    ACCEPT(HttpHeaders.ACCEPT),
-    CONTENT_TYPE(HttpHeaders.CONTENT_TYPE);
+    public static final String AUTHORIZATION = HttpHeaders.AUTHORIZATION;
+    public static final String ACCEPT = HttpHeaders.ACCEPT;
+    public static final String CONTENT_TYPE = HttpHeaders.CONTENT_TYPE;
 
-    private String value;
-
-    CommonHeaderName(String value) {
-        this.value = value;
-    }
-
-    public String get() {
-        return value;
+    private CommonHeaderName() {
+        // utility class
     }
 
 }

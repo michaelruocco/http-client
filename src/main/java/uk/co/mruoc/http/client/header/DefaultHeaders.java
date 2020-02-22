@@ -80,12 +80,12 @@ public class DefaultHeaders implements Headers {
 
     @Override
     public String getAuthorization() {
-        return get(AUTHORIZATION.get());
+        return get(AUTHORIZATION);
     }
 
     @Override
     public boolean hasAuthorization() {
-        return contains(AUTHORIZATION.get());
+        return contains(AUTHORIZATION);
     }
 
     @Override
@@ -96,12 +96,12 @@ public class DefaultHeaders implements Headers {
 
     @Override
     public String getContentType() {
-        return get(CONTENT_TYPE.get());
+        return get(CONTENT_TYPE);
     }
 
     @Override
     public boolean hasContentType() {
-        return contains(CONTENT_TYPE.get());
+        return contains(CONTENT_TYPE);
     }
 
     @Override
@@ -112,12 +112,12 @@ public class DefaultHeaders implements Headers {
 
     @Override
     public String getAccept() {
-        return get(ACCEPT.get());
+        return get(ACCEPT);
     }
 
     @Override
     public boolean hasAccept() {
-        return contains(ACCEPT.get());
+        return contains(ACCEPT);
     }
 
     @Override

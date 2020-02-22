@@ -3,6 +3,7 @@ package uk.co.mruoc.http.client;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 
 import java.io.IOException;
 
@@ -28,7 +29,7 @@ public class ResponseConverter {
         return EntityUtils.toString(response.getEntity());
     }
 
-    private static DefaultHeaders extractHeaders(HttpResponse response) {
+    private static Headers extractHeaders(HttpResponse response) {
         return new DefaultHeaders(response);
     }
 
