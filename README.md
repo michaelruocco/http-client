@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/michaelruocco/http-client.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client)
 [![codecov](https://codecov.io/gh/michaelruocco/http-client/branch/master/graph/badge.svg)](https://codecov.io/gh/michaelruocco/http-client)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client/)
+[ ![Download](https://api.bintray.com/packages/michaelruocco/maven/rest-client/images/download.svg) ](https://bintray.com/michaelruocco/maven/rest-client/_latestVersion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/54ce00d4a4084dabba53f5e2c5ef9a01)](https://www.codacy.com/app/michael-ruocco/http-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/http-client&amp;utm_campaign=Badge_Grade)
 
 This project aims to provide a simpler interface for RESTful JSON api calls.
