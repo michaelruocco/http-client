@@ -11,6 +11,9 @@ public interface RestClient extends ReadOnlyRestClient {
     Response put(String endpoint, String entity);
     Response put(String endpoint, String entity, Headers headers);
 
+    Response patch(String endpoint, String entity);
+    Response patch(String endpoint, String entity, Headers headers);
+
     Response delete(String endpoint);
     Response delete(String endpoint, Headers headers);
 

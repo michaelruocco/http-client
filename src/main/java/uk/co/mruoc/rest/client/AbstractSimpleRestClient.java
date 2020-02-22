@@ -38,6 +38,12 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
     }
 
     @Override
+    public Response patch(String endpoint, String entity, Headers headers) {
+        HttpPatch patch = createPatch(endpoint, entity, headers);
+        return execute(patch);
+    }
+
+    @Override
     public Response get(String endpoint, Headers headers) {
         HttpGet get = createGet(endpoint, headers);
         return execute(get);
@@ -69,16 +75,23 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
 
     private HttpPost createPost(String endpoint, String entity, Headers headers) {
         HttpPost post = new HttpPost(endpoint);
-        post.setEntity(toJsonEntity(entity));
+        setEntity(post, entity);
         addHeaders(post, headers);
         return post;
     }
 
     private HttpPut createPut(String endpoint, String entity, Headers headers) {
         HttpPut put = new HttpPut(endpoint);
-        put.setEntity(toJsonEntity(entity));
+        setEntity(put, entity);
         addHeaders(put, headers);
         return put;
+    }
+
+    private HttpPatch createPatch(String endpoint, String entity, Headers headers) {
+        HttpPatch patch = new HttpPatch(endpoint);
+        setEntity(patch, entity);
+        addHeaders(patch, headers);
+        return patch;
     }
 
     private HttpGet createGet(String endpoint, Headers headers) {
@@ -92,6 +105,10 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
         HttpDelete delete = new HttpDelete(endpoint);
         addHeaders(delete, headers);
         return delete;
+    }
+
+    private void setEntity(HttpEntityEnclosingRequestBase request, String entity) {
+        request.setEntity(toJsonEntity(entity));
     }
 
     private void addHeaders(HttpRequest request, Headers headers) {

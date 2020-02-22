@@ -23,6 +23,14 @@ public abstract class BaseRestClient implements RestClient {
     public abstract Response put(String endpoint, String entity, Headers headers);
 
     @Override
+    public Response patch(String endpoint, String entity) {
+        return put(endpoint, entity, new DefaultHeaders());
+    }
+
+    @Override
+    public abstract Response patch(String endpoint, String entity, Headers headers);
+
+    @Override
     public Response get(String endpoint) {
         return get(endpoint, new DefaultHeaders());
     }

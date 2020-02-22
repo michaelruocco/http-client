@@ -7,7 +7,7 @@ import uk.co.mruoc.rest.client.header.Headers;
 import uk.co.mruoc.rest.client.response.Response;
 import uk.co.mruoc.rest.client.test.FakeApacheHttpClient;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SimpleRestClientTest {
 
@@ -93,6 +93,42 @@ public class SimpleRestClientTest {
     public void putHeadersAreAddedToRequest() {
         headers.add("Some-Header", "Value");
         client.put(ENDPOINT, POST_BODY, headers);
+
+        assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");
+    }
+
+    @Test
+    public void returnsResponseForPatch() {
+        Response response = client.patch(ENDPOINT, "");
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void patchRequestsCorrectEndpoint() {
+        client.patch(ENDPOINT, "");
+
+        assertThat(fakeHttp.lastRequestUri()).isEqualTo(ENDPOINT);
+    }
+
+    @Test
+    public void patchBodyIsAddedToRequest() {
+        client.patch(ENDPOINT, POST_BODY);
+
+        assertThat(fakeHttp.lastRequestBody()).isEqualTo(POST_BODY);
+    }
+
+    @Test
+    public void patchResponseBodyIsReturned() {
+        Response response = client.patch(ENDPOINT, "");
+
+        assertThat(response.getBody()).isEqualTo(RESPONSE_BODY);
+    }
+
+    @Test
+    public void patchHeadersAreAddedToRequest() {
+        headers.add("Some-Header", "Value");
+        client.patch(ENDPOINT, POST_BODY, headers);
 
         assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");
     }
