@@ -22,6 +22,10 @@ public class SimpleRestClient extends AbstractSimpleRestClient {
 
     private final BodyExtractor bodyExtractor = new BodyExtractor();
 
+    public SimpleRestClient() {
+        this(ApacheHttpClientFactory.build());
+    }
+
     public SimpleRestClient(HttpClient client) {
         super(client);
     }

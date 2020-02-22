@@ -60,6 +60,15 @@ public class ResponseTest {
     }
 
     @Test
+    public void shouldReturnHeadersAsMap() {
+        Headers headers = new DefaultHeaders();
+
+        Response response = builder.setHeaders(headers).build();
+
+        assertThat(response.getHeadersAsMap()).isEmpty();
+    }
+
+    @Test
     public void shouldBeInOneHundredRange() {
         assertThat(responseWithStatusCode(99).is1xx()).isFalse();
 

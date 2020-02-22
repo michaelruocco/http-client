@@ -4,6 +4,7 @@ import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class Response {
 
@@ -35,6 +36,10 @@ public class Response {
 
     public Headers getHeaders() {
         return headers;
+    }
+
+    public Map<String, String> getHeadersAsMap() {
+        return headers.values();
     }
 
     public boolean is1xx() {
