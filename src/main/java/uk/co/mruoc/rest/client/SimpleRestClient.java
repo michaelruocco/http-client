@@ -1,10 +1,14 @@
 package uk.co.mruoc.rest.client;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpRequest;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import uk.co.mruoc.rest.client.header.HeaderFormatter;
+import uk.co.mruoc.rest.client.header.Headers;
 import uk.co.mruoc.rest.client.response.Response;
 
 import java.io.IOException;
@@ -12,6 +16,7 @@ import java.io.UncheckedIOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static java.net.URLDecoder.decode;
 
@@ -53,11 +58,11 @@ public class SimpleRestClient extends AbstractSimpleRestClient {
     }
 
     private void logHeaders(HttpRequest request) {
-        Collection<org.apache.http.Header> headers = Arrays.asList(request.getAllHeaders());
-        headers.forEach(header -> LOG.debug("response header " + header.getName() + " with value " + header.getValue()));
+        LOG.debug("request headers " + HeaderFormatter.toString(request.getAllHeaders()));
     }
 
     private void logHeaders(Response response) {
+        LOG.debug("response headers " + HeaderFormatter.toString(response.getHeaders()));
         Collection<String> headersKeys = response.getHeaderKeys();
         headersKeys.forEach(h -> LOG.debug("response header " + h + " with value " + response.getHeader(h)));
     }
