@@ -2,7 +2,8 @@ package uk.co.mruoc.http.client.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import uk.co.mruoc.http.client.Headers;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 import uk.co.mruoc.http.client.Response;
 import uk.co.mruoc.http.client.Response.ResponseBuilder;
 
@@ -61,7 +62,7 @@ public class FakeHttpClientTest {
 
     @Test
     public void allowsPullingOutSingleHeader() {
-        Headers headers = new Headers();
+        Headers headers = new DefaultHeaders();
         headers.add("Custom-Header1", "headerValue1");
 
         client.delete(ENDPOINT, headers);
@@ -104,7 +105,7 @@ public class FakeHttpClientTest {
 
     @Test
     public void returnsCannedResponseHeaders() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
         headers.add("Response-Header", "responseHeaderValue");
 
         client.cannedResponse(201, "CannedBody", headers);
@@ -155,7 +156,7 @@ public class FakeHttpClientTest {
 
     @Test
     public void usingResponseReturnsCannedResponseHeaders() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
         headers.add("Response-Header", "responseHeaderValue");
         Response response = new ResponseBuilder().setHeaders(headers).build();
 

@@ -1,10 +1,13 @@
 package uk.co.mruoc.http.client;
 
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
+
 public abstract class BaseHttpClient implements HttpClient {
     
     @Override
     public Response post(String endpoint, String entity) {
-        return post(endpoint, entity, new Headers());
+        return post(endpoint, entity, new DefaultHeaders());
     }
 
     @Override
@@ -12,7 +15,7 @@ public abstract class BaseHttpClient implements HttpClient {
 
     @Override
     public Response put(String endpoint, String entity) {
-        return put(endpoint, entity, new Headers());
+        return put(endpoint, entity, new DefaultHeaders());
     }
 
     @Override
@@ -20,7 +23,7 @@ public abstract class BaseHttpClient implements HttpClient {
 
     @Override
     public Response get(String endpoint) {
-        return get(endpoint, new Headers());
+        return get(endpoint, new DefaultHeaders());
     }
 
     @Override
@@ -28,7 +31,7 @@ public abstract class BaseHttpClient implements HttpClient {
 
     @Override
     public Response delete(String endpoint) {
-        return delete(endpoint, new Headers());
+        return delete(endpoint, new DefaultHeaders());
     }
 
     @Override

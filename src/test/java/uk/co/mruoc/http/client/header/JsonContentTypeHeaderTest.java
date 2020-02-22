@@ -1,7 +1,9 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
 import org.apache.http.HttpHeaders;
 import org.junit.Test;
+import uk.co.mruoc.http.client.header.Header;
+import uk.co.mruoc.http.client.header.JsonContentTypeHeader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

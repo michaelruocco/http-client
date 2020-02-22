@@ -1,6 +1,7 @@
 package uk.co.mruoc.http.client.test;
 
-import uk.co.mruoc.http.client.Headers;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 import uk.co.mruoc.http.client.Response;
 import uk.co.mruoc.http.client.Response.ResponseBuilder;
 
@@ -53,7 +54,7 @@ public class FakeMultipleResponseHttpClient extends DefaultFakeHttpClient {
     }
 
     @Override
-    public void cannedResponse(int status, String entity, Headers headers) {
+    public void cannedResponse(int status, String entity, DefaultHeaders headers) {
         Response response = new ResponseBuilder()
                 .setStatusCode(status)
                 .setBody(entity)

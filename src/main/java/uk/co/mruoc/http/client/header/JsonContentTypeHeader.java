@@ -1,4 +1,4 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
 public class JsonContentTypeHeader extends ContentTypeHeader {
 

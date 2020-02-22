@@ -2,6 +2,8 @@ package uk.co.mruoc.http.client;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 import uk.co.mruoc.http.client.test.FakeApacheHttpClient;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -12,7 +14,7 @@ public class SimpleHttpClientTest {
     private static final String POST_BODY = "{ post: body, another: value }";
     private static final String RESPONSE_BODY = "{ response: body, another: value }";
 
-    private final Headers headers = new Headers();
+    private final Headers headers = new DefaultHeaders();
     private final FakeApacheHttpClient fakeHttp = new FakeApacheHttpClient();
 
     private final HttpClient client = new SimpleHttpClient(fakeHttp);

@@ -1,12 +1,14 @@
 package uk.co.mruoc.http.client;
 
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+
 import java.util.Collection;
 
 public class Response {
 
     private final int statusCode;
     private final String body;
-    private final Headers headers;
+    private final DefaultHeaders headers;
 
     private Response(ResponseBuilder builder) {
         this.statusCode = builder.statusCode;
@@ -30,7 +32,7 @@ public class Response {
         return headers.getNames();
     }
 
-    public Headers getHeaders() {
+    public DefaultHeaders getHeaders() {
         return headers;
     }
 
@@ -62,7 +64,7 @@ public class Response {
 
         private int statusCode;
         private String body = "";
-        private Headers headers = new Headers();
+        private DefaultHeaders headers = new DefaultHeaders();
 
         public ResponseBuilder setStatusCode(int statusCode) {
             this.statusCode = statusCode;
@@ -74,7 +76,7 @@ public class Response {
             return this;
         }
 
-        public ResponseBuilder setHeaders(Headers headers) {
+        public ResponseBuilder setHeaders(DefaultHeaders headers) {
             this.headers = headers;
             return this;
         }

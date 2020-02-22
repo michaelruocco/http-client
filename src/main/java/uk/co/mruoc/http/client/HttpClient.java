@@ -1,5 +1,7 @@
 package uk.co.mruoc.http.client;
 
+import uk.co.mruoc.http.client.header.Headers;
+
 public interface HttpClient extends ReadOnlyHttpClient {
 
     Response post(String endpoint, String entity);

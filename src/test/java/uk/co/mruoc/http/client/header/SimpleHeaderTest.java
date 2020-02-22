@@ -1,15 +1,15 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BasicHeaderTest {
+public class SimpleHeaderTest {
 
     private static final String NAME = "header-name";
     private static final String VALUE = "header-value";
 
-    private final Header header = new BasicHeader(NAME, VALUE);
+    private final Header header = new SimpleHeader(NAME, VALUE);
 
     @Test
     public void shouldReturnName() {

@@ -1,11 +1,13 @@
 package uk.co.mruoc.http.client;
 
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+
 public class Request {
 
     private final String uri;
     private final Method method;
     private final String body;
-    private final Headers headers;
+    private final DefaultHeaders headers;
 
     private Request(RequestBuilder builder) {
         this.uri = builder.uri;
@@ -26,7 +28,7 @@ public class Request {
         return headers.get(key);
     }
 
-    public Headers getHeaders() {
+    public DefaultHeaders getHeaders() {
         return headers;
     }
 
@@ -39,7 +41,7 @@ public class Request {
         private String uri;
         private Method method;
         private String body;
-        private Headers headers;
+        private DefaultHeaders headers;
 
         public RequestBuilder setUri(String uri) {
             this.uri = uri;
@@ -56,7 +58,7 @@ public class Request {
             return this;
         }
 
-        public RequestBuilder setHeaders(Headers headers) {
+        public RequestBuilder setHeaders(DefaultHeaders headers) {
             this.headers = headers;
             return this;
         }

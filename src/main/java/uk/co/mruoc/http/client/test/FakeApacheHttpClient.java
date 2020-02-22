@@ -15,6 +15,8 @@ import org.apache.http.message.BasicStatusLine;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 import uk.co.mruoc.http.client.*;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -42,7 +44,7 @@ public class FakeApacheHttpClient implements HttpClient {
     }
 
     public void cannedResponse(int status, String body) {
-        cannedResponse(status, body, new Headers());
+        cannedResponse(status, body, new DefaultHeaders());
     }
 
     public void cannedResponse(int status, String body, Headers headers) {
@@ -69,7 +71,7 @@ public class FakeApacheHttpClient implements HttpClient {
         return lastRequest().getHeader(name);
     }
 
-    public Headers lastRequestHeaders() {
+    public DefaultHeaders lastRequestHeaders() {
         return lastRequest().getHeaders();
     }
 

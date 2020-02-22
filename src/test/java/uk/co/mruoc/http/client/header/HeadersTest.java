@@ -1,9 +1,10 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
 import org.apache.http.HttpMessage;
 import org.junit.Test;
+import uk.co.mruoc.http.client.ApacheHeaderBuilder;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -11,7 +12,7 @@ public class HeadersTest {
 
     private final HttpMessage httpMessage = mock(HttpMessage.class);
 
-    private final Headers headers = new Headers();
+    private final DefaultHeaders headers = new DefaultHeaders();
 
     @Test(expected = HeaderNotFoundException.class)
     public void shouldThrowExceptionIfHeaderDoesNotExist() {
@@ -62,22 +63,10 @@ public class HeadersTest {
     }
 
     @Test
-    public void headerExistsShouldReturnFalseIfHeaderDoesNotExist() {
-        assertThat(headers.headerExists("name1")).isFalse();
-    }
-
-    @Test
-    public void headerExistsShouldReturnTrueIfHeaderExists() {
-        headers.add("name1", "value1");
-
-        assertThat(headers.headerExists("name1")).isTrue();
-    }
-
-    @Test
     public void shouldPopulateHeadersFromHttpMessage() {
         org.apache.http.Header[] apacheHeaders = givenHttpMessageWillReturnHeaders();
 
-        Headers newHeaders = new Headers(httpMessage);
+        Headers newHeaders = new DefaultHeaders(httpMessage);
         newHeaders.addHeaders(httpMessage);
 
         assertThat(newHeaders.get(apacheHeaders[0].getName())).isEqualTo(apacheHeaders[0].getValue());
@@ -86,7 +75,7 @@ public class HeadersTest {
 
     @Test
     public void shouldAddCustomBasicHeader() {
-        Header header = new BasicHeader("custom-name", "custom-value");
+        Header header = new SimpleHeader("custom-name", "custom-value");
 
         headers.add(header);
 
@@ -100,7 +89,7 @@ public class HeadersTest {
 
     @Test
     public void shouldReturnTrueIfContainsHeader() {
-        Header header = new BasicHeader("custom-name", "custom-value");
+        Header header = new SimpleHeader("custom-name", "custom-value");
 
         headers.add(header);
 
@@ -113,12 +102,7 @@ public class HeadersTest {
 
         headers.addBearerToken(token);
 
-        assertThat(headers.getBearerToken()).isEqualTo("Bearer " + token);
-    }
-
-    @Test
-    public void shouldNotHaveBearerTokenByDefault() {
-        assertThat(headers.hasBearerToken()).isFalse();
+        assertThat(headers.getAuthorization()).isEqualTo("Bearer " + token);
     }
 
     @Test
@@ -127,30 +111,7 @@ public class HeadersTest {
 
         headers.addBearerToken(token);
 
-        assertThat(headers.hasBearerToken()).isTrue();
-    }
-
-    @Test
-    public void shouldAddJwtAssertion() {
-        String application = "my-application";
-
-        headers.addJwtAssertion(application);
-
-        assertThat(headers.getJwtAssertion()).isEqualTo(application);
-    }
-
-    @Test
-    public void shouldNotHaveJwtAssertionByDefault() {
-        assertThat(headers.hasJwtAssertion()).isFalse();
-    }
-
-    @Test
-    public void shouldHaveJwtAssertionIfSet() {
-        String application = "my-application";
-
-        headers.addJwtAssertion(application);
-
-        assertThat(headers.hasJwtAssertion()).isTrue();
+        assertThat(headers.hasAuthorization()).isTrue();
     }
 
     @Test
@@ -200,49 +161,26 @@ public class HeadersTest {
     }
 
     @Test
-    public void shouldAddAuthToken() {
-        String authToken = "my-token";
-
-        headers.addAuthToken(authToken);
-
-        assertThat(headers.getAuthToken()).isEqualTo(authToken);
-    }
-
-    @Test
-    public void shouldNotHaveAuthTokenByDefault() {
-        assertThat(headers.hasAuthToken()).isFalse();
-    }
-
-    @Test
-    public void shouldHaveAuthTokenIfSet() {
-        String authToken = "my-token";
-
-        headers.addAuthToken(authToken);
-
-        assertThat(headers.hasAuthToken()).isTrue();
-    }
-
-    @Test
     public void shouldAddBasicAuth() {
         String authToken = "my-token";
 
         headers.addBasicAuth(authToken);
 
-        assertThat(headers.getBasicAuth()).isEqualTo("Basic " + authToken);
+        assertThat(headers.getAuthorization()).isEqualTo("Basic " + authToken);
     }
 
     @Test
-    public void shouldNotHaveBasicAuthByDefault() {
-        assertThat(headers.hasBasicAuth()).isFalse();
+    public void shouldNotHaveAuthorizationByDefault() {
+        assertThat(headers.hasAuthorization()).isFalse();
     }
 
     @Test
-    public void shouldHaveBasicAuthIfSet() {
+    public void shouldHaveAuthorizationIfBasicAuthSet() {
         String authToken = "my-token";
 
         headers.addBasicAuth(authToken);
 
-        assertThat(headers.hasBasicAuth()).isTrue();
+        assertThat(headers.hasAuthorization()).isTrue();
     }
 
     private org.apache.http.Header[] givenHttpMessageWillReturnHeaders() {

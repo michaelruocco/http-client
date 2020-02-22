@@ -1,4 +1,6 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
+
+import uk.co.mruoc.http.client.Base64Encoder;
 
 public class BasicAuthTokenGenerator {
 

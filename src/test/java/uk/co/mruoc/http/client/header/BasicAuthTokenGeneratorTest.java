@@ -1,6 +1,10 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
 import org.junit.Test;
+import uk.co.mruoc.http.client.header.BasicAuthCredentials;
+import uk.co.mruoc.http.client.header.BasicAuthTokenGenerator;
+import uk.co.mruoc.http.client.header.DefaultBasicAuthCredentials;
+import uk.co.mruoc.http.client.header.Header;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

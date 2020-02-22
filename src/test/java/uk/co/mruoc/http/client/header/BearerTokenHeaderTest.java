@@ -1,4 +1,4 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
 import org.apache.http.HttpHeaders;
 import org.junit.Test;

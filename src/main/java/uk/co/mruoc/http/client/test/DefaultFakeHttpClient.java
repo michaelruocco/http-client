@@ -2,6 +2,7 @@ package uk.co.mruoc.http.client.test;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import uk.co.mruoc.http.client.*;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class DefaultFakeHttpClient extends SimpleHttpClient implements FakeHttpC
     }
 
     @Override
-    public Headers lastRequestHeaders() {
+    public DefaultHeaders lastRequestHeaders() {
         return fakeHttp.lastRequestHeaders();
     }
 
@@ -65,7 +66,7 @@ public class DefaultFakeHttpClient extends SimpleHttpClient implements FakeHttpC
     }
 
     @Override
-    public void cannedResponse(int status, String entity, Headers headers) {
+    public void cannedResponse(int status, String entity, DefaultHeaders headers) {
         fakeHttp.cannedResponse(status, entity, headers);
     }
 

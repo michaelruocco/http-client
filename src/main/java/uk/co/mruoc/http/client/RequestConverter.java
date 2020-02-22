@@ -1,6 +1,7 @@
 package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpRequest;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
 
 import static uk.co.mruoc.http.client.Request.*;
 
@@ -37,8 +38,8 @@ public class RequestConverter {
         }
     }*/
 
-    private static Headers extractHeaders(HttpRequest request) {
-        return new Headers(request);
+    private static DefaultHeaders extractHeaders(HttpRequest request) {
+        return new DefaultHeaders(request);
     }
 
 }

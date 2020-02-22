@@ -2,6 +2,7 @@ package uk.co.mruoc.http.client;
 
 import org.junit.Test;
 import uk.co.mruoc.http.client.Response.ResponseBuilder;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +30,7 @@ public class ResponseTest {
 
     @Test
     public void shouldReturnHeaderValue() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
         headers.add("my-header", "some-value");
 
         Response response = builder.setHeaders(headers).build();
@@ -39,7 +40,7 @@ public class ResponseTest {
 
     @Test
     public void shouldReturnHeaderKeys() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
         headers.add("my-header-1", "some-value");
         headers.add("my-header-2", "some-value");
 
@@ -50,7 +51,7 @@ public class ResponseTest {
 
     @Test
     public void shouldReturnHeaders() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
 
         Response response = builder.setHeaders(headers).build();
 

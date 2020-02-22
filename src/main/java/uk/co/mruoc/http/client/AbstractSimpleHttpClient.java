@@ -6,6 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
+import uk.co.mruoc.http.client.header.Headers;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

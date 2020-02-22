@@ -1,7 +1,8 @@
 package uk.co.mruoc.http.client.test;
 
 import org.junit.Test;
-import uk.co.mruoc.http.client.Headers;
+import uk.co.mruoc.http.client.header.DefaultHeaders;
+import uk.co.mruoc.http.client.header.Headers;
 import uk.co.mruoc.http.client.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +14,7 @@ public class FakeMultipleResponseHttpClientTest {
     private static final String ENTITY = "the-entity";
 
     private final FakeHttpClient client = new FakeMultipleResponseHttpClient();
-    private final Headers headers = new Headers();
+    private final DefaultHeaders headers = new DefaultHeaders();
 
     @Test
     public void getReturnsFakeResponsesInSequence() {
@@ -61,7 +62,7 @@ public class FakeMultipleResponseHttpClientTest {
 
     @Test
     public void recordsAllRequests() {
-        Headers headers = new Headers();
+        Headers headers = new DefaultHeaders();
         headers.add("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);
@@ -76,7 +77,7 @@ public class FakeMultipleResponseHttpClientTest {
 
     @Test
     public void recordsAllRequestDetails() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
         headers.add("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);
@@ -95,7 +96,7 @@ public class FakeMultipleResponseHttpClientTest {
 
     @Test
     public void recordsAllRequestDetailsAsRequest() {
-        Headers headers = new Headers();
+        DefaultHeaders headers = new DefaultHeaders();
         headers.add("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);

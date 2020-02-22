@@ -1,15 +1,15 @@
-package uk.co.mruoc.http.client;
+package uk.co.mruoc.http.client.header;
 
-public class BasicHeader implements Header {
+public class SimpleHeader implements Header {
 
     private final String name;
     private final String value;
 
-    public BasicHeader(HeaderName name, String value) {
+    public SimpleHeader(CommonHeaderName name, String value) {
         this(name.get(), value);
     }
 
-    public BasicHeader(String name, String value) {
+    public SimpleHeader(String name, String value) {
         this.name = name;
         this.value = value;
     }
