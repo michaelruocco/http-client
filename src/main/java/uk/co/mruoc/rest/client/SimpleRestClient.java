@@ -5,6 +5,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import uk.co.mruoc.rest.client.response.Response;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -20,14 +21,6 @@ public class SimpleRestClient extends AbstractSimpleRestClient {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleRestClient.class);
 
     private final BodyExtractor bodyExtractor = new BodyExtractor();
-
-    public SimpleRestClient() {
-        this(ApacheHttpClientFactory.build());
-    }
-
-    public SimpleRestClient(int httpTimeout) {
-        this(ApacheHttpClientFactory.build(httpTimeout));
-    }
 
     public SimpleRestClient(HttpClient client) {
         super(client);
@@ -53,7 +46,7 @@ public class SimpleRestClient extends AbstractSimpleRestClient {
         logHeaders(response);
     }
 
-    private void logBody(HttpRequest request) throws IOException {
+    private void logBody(HttpRequest request) {
         String body = bodyExtractor.extract(request);
         if (!body.isEmpty())
             LOG.info("request body " + body);
@@ -68,7 +61,5 @@ public class SimpleRestClient extends AbstractSimpleRestClient {
         Collection<String> headersKeys = response.getHeaderKeys();
         headersKeys.forEach(h -> LOG.debug("response header " + h + " with value " + response.getHeader(h)));
     }
-
-
 
 }

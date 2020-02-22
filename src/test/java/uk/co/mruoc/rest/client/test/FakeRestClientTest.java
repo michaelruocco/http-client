@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
-import uk.co.mruoc.rest.client.Response;
-import uk.co.mruoc.rest.client.Response.ResponseBuilder;
+import uk.co.mruoc.rest.client.response.Response;
+import uk.co.mruoc.rest.client.response.Response.ResponseBuilder;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

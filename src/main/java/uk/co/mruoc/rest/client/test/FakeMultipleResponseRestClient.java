@@ -1,8 +1,8 @@
 package uk.co.mruoc.rest.client.test;
 
 import uk.co.mruoc.rest.client.header.Headers;
-import uk.co.mruoc.rest.client.Response;
-import uk.co.mruoc.rest.client.Response.ResponseBuilder;
+import uk.co.mruoc.rest.client.response.Response;
+import uk.co.mruoc.rest.client.response.Response.ResponseBuilder;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

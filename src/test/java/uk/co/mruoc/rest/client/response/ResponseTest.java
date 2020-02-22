@@ -1,7 +1,7 @@
-package uk.co.mruoc.rest.client;
+package uk.co.mruoc.rest.client.response;
 
 import org.junit.Test;
-import uk.co.mruoc.rest.client.Response.ResponseBuilder;
+import uk.co.mruoc.rest.client.response.Response.ResponseBuilder;
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
 

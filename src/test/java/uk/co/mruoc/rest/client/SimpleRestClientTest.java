@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
+import uk.co.mruoc.rest.client.response.Response;
 import uk.co.mruoc.rest.client.test.FakeApacheHttpClient;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;

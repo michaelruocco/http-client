@@ -1,6 +1,8 @@
-package uk.co.mruoc.rest.client;
+package uk.co.mruoc.rest.client.request;
 
 import org.apache.http.HttpRequest;
+import uk.co.mruoc.rest.client.BodyExtractor;
+import uk.co.mruoc.rest.client.Method;
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
 

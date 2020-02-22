@@ -1,8 +1,8 @@
 package uk.co.mruoc.rest.client.test;
 
 import uk.co.mruoc.rest.client.Method;
-import uk.co.mruoc.rest.client.Request;
-import uk.co.mruoc.rest.client.Response;
+import uk.co.mruoc.rest.client.request.Request;
+import uk.co.mruoc.rest.client.response.Response;
 import uk.co.mruoc.rest.client.RestClient;
 import uk.co.mruoc.rest.client.header.Headers;
 

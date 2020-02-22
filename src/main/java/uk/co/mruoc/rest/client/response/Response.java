@@ -1,4 +1,4 @@
-package uk.co.mruoc.rest.client;
+package uk.co.mruoc.rest.client.response;
 
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;

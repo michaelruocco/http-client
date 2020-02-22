@@ -7,6 +7,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import uk.co.mruoc.rest.client.header.Headers;
+import uk.co.mruoc.rest.client.response.Response;
+import uk.co.mruoc.rest.client.response.ResponseConverter;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -18,14 +20,6 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
 
     private final ResponseConverter converter = new ResponseConverter();
     private final HttpClient client;
-
-    public AbstractSimpleRestClient() {
-        this(ApacheHttpClientFactory.build());
-    }
-
-    public AbstractSimpleRestClient(int httpTimeout) {
-        this(ApacheHttpClientFactory.build(httpTimeout));
-    }
 
     public AbstractSimpleRestClient(HttpClient client) {
         this.client = client;

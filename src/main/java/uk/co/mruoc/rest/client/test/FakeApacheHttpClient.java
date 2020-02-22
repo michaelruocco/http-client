@@ -16,8 +16,8 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 import uk.co.mruoc.rest.client.HttpClientException;
 import uk.co.mruoc.rest.client.Method;
-import uk.co.mruoc.rest.client.Request;
-import uk.co.mruoc.rest.client.RequestConverter;
+import uk.co.mruoc.rest.client.request.Request;
+import uk.co.mruoc.rest.client.request.RequestConverter;
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
 

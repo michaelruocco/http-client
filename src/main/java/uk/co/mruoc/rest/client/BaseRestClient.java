@@ -2,6 +2,7 @@ package uk.co.mruoc.rest.client;
 
 import uk.co.mruoc.rest.client.header.DefaultHeaders;
 import uk.co.mruoc.rest.client.header.Headers;
+import uk.co.mruoc.rest.client.response.Response;
 
 public abstract class BaseRestClient implements RestClient {
     

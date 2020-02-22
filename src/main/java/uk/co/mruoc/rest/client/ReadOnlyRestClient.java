@@ -1,6 +1,7 @@
 package uk.co.mruoc.rest.client;
 
 import uk.co.mruoc.rest.client.header.Headers;
+import uk.co.mruoc.rest.client.response.Response;
 
 public interface ReadOnlyRestClient {
 

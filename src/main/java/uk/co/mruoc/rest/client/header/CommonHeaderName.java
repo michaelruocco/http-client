@@ -2,14 +2,10 @@ package uk.co.mruoc.rest.client.header;
 
 import org.apache.http.HttpHeaders;
 
-public class CommonHeaderName {
+public interface CommonHeaderName {
 
-    public static final String AUTHORIZATION = HttpHeaders.AUTHORIZATION;
-    public static final String ACCEPT = HttpHeaders.ACCEPT;
-    public static final String CONTENT_TYPE = HttpHeaders.CONTENT_TYPE;
-
-    private CommonHeaderName() {
-        // utility class
-    }
+    String AUTHORIZATION = HttpHeaders.AUTHORIZATION;
+    String ACCEPT = HttpHeaders.ACCEPT;
+    String CONTENT_TYPE = HttpHeaders.CONTENT_TYPE;
 
 }

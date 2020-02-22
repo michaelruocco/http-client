@@ -1,4 +1,4 @@
-package uk.co.mruoc.rest.client;
+package uk.co.mruoc.rest.client.response;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -7,7 +7,7 @@ import uk.co.mruoc.rest.client.header.Headers;
 
 import java.io.IOException;
 
-import static uk.co.mruoc.rest.client.Response.*;
+import static uk.co.mruoc.rest.client.response.Response.*;
 
 public class ResponseConverter {
 

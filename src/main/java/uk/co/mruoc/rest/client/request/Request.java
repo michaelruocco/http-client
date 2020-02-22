@@ -1,5 +1,6 @@
-package uk.co.mruoc.rest.client;
+package uk.co.mruoc.rest.client.request;
 
+import uk.co.mruoc.rest.client.Method;
 import uk.co.mruoc.rest.client.header.Headers;
 
 public class Request {

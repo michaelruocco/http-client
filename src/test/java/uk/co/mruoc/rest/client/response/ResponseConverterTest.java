@@ -1,8 +1,9 @@
-package uk.co.mruoc.rest.client;
+package uk.co.mruoc.rest.client.response;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.junit.Test;
+import uk.co.mruoc.rest.client.ApacheHeaderBuilder;
 
 import java.io.IOException;
 
