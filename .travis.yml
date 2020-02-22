@@ -32,7 +32,7 @@ stages:
 jobs:
   include:
     - stage: build
-      script: ./gradlew check dependencyUpdates
+      script: ./gradlew currentVersion check dependencyUpdates
 
     - stage: snapshot
       script: ./gradlew artifactoryPublish -Dbuild.number=$TRAVIS_BUILD_NUMBER
