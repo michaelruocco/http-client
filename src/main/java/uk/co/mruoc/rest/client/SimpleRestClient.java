@@ -1,22 +1,17 @@
 package uk.co.mruoc.rest.client;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
 import org.apache.http.HttpRequest;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.co.mruoc.rest.client.header.HeaderFormatter;
-import uk.co.mruoc.rest.client.header.Headers;
 import uk.co.mruoc.rest.client.response.Response;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import static java.net.URLDecoder.decode;
 

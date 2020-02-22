@@ -1,12 +1,25 @@
 plugins {
     id 'jacoco'
+    id 'com.diffplug.gradle.spotless' version '3.25.0'
     id 'com.github.ben-manes.versions' version '0.28.0'
+    id 'com.jfrog.bintray' version '1.8.4'
+    id 'com.jfrog.artifactory' version '4.10.0'
+    id 'pl.allegro.tech.build.axion-release' version '1.10.2'
 }
 
 apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
+apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
+
+group 'com.github.michaelruocco'
+
+scmVersion {
+    versionCreator 'versionWithBranch'
+    tag {
+        prefix = 'rest-client'
+    }
+}
+project.version = scmVersion.version
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -26,6 +39,24 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '3.3.0'
 }
 
+spotless {
+    java {
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+
+        replace 'Not enough space after if', 'if(', 'if ('
+        replaceRegex 'Too much space after if', 'if +\\(', 'if ('
+
+        replace 'Not enough space after for', 'for(', 'for ('
+        replaceRegex 'Too much space after for', 'for +\\(', 'for ('
+
+        replace 'Not enough space after while', 'while(', 'while ('
+        replaceRegex 'Too much space after while', 'while +\\(', 'while ('
+    }
+}
+
 jacoco {
     toolVersion = '0.8.5'
 }
@@ -38,18 +69,107 @@ jacocoTestReport {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
     from javadoc.destinationDir
 }
 
 artifacts {
     archives sourcesJar
     archives javadocJar
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name 'BSD License'
+            url 'http://www.opensource.org/licenses/bsd-license.php'
+            distribution 'repo'
+        }
+    }
+    developers {
+        developer {
+            id 'mruoc'
+            name 'Michael Ruocco'
+            email 'michael.ruocco@hotmail.com'
+        }
+    }
+
+    scm {
+        url 'https://github.com/michaelruocco/rest-client'
+    }
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+            groupId project.group
+            artifactId 'rest-client'
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Client library for calling restful APIs from Java')
+                root.appendNode('name', 'jackson-json-api')
+                root.appendNode('url', 'https://github.com/michaelruocco/rest-client')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['mavenPublication']
+    publish = true
+
+    pkg {
+        repo = 'maven'
+        name = 'rest-client'
+        userOrg = 'michaelruocco'
+        licenses = ['bsd']
+        vcsUrl = 'https://github.com/michaelruocco/rest-client.git'
+        version {
+            name = project.version
+            desc = project.version
+            released = new Date()
+            gpg {
+                sign = true
+            }
+            mavenCentralSync {
+                sync = true
+            }
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'http://oss.jfrog.org'
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+            username = System.getenv('BINTRAY_USER')
+            password = System.getenv('BINTRAY_KEY')
+        }
+        defaults {
+            publications('mavenPublication')
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+    resolve {
+        repoKey = 'jcenter'
+    }
+    clientConfig.info.setBuildNumber(System.getProperty('build.number'))
 }
 
 dependencyUpdates.resolutionStrategy {
@@ -60,63 +180,6 @@ dependencyUpdates.resolutionStrategy {
             }
             if (rejected) {
                 selection.reject('Release candidate')
-            }
-        }
-    }
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.hasTask(uploadArchives)) {
-        signing {
-            required true
-            sign configurations.archives
-        }
-    }
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                packaging 'jar'
-                name 'Http Client'
-                description 'Code library to enable easy interaction with restful json apis'
-                groupId 'com.github.michaelruocco'
-                artifactId 'http-client'
-                version '4.0.4'
-                url 'https://github.com/michaelruocco/http-client'
-
-                developers {
-                    developer {
-                        id 'mruoc'
-                        name 'Michael Ruocco'
-                        email 'michael.ruocco@hotmail.com'
-                    }
-                }
-
-                scm {
-                    connection 'scm:git:git@github.com/michaelruocco/http-client.git'
-                    developerConnection 'scm:git:git@github.com/michaelruocco/http-client.git'
-                    url 'git@github.com/michaelruocco/http-client.git'
-                }
-
-                licenses {
-                    license {
-                        name 'BSD License'
-                        url 'http://www.opensource.org/licenses/bsd-license.php'
-                        distribution 'repo'
-                    }
-                }
             }
         }
     }

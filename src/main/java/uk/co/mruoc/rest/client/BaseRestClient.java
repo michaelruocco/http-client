@@ -5,7 +5,7 @@ import uk.co.mruoc.rest.client.header.Headers;
 import uk.co.mruoc.rest.client.response.Response;
 
 public abstract class BaseRestClient implements RestClient {
-    
+
     @Override
     public Response post(String endpoint, String entity) {
         return post(endpoint, entity, new DefaultHeaders());
@@ -45,5 +45,5 @@ public abstract class BaseRestClient implements RestClient {
 
     @Override
     public abstract Response delete(String endpoint, Headers headers);
-    
+
 }
