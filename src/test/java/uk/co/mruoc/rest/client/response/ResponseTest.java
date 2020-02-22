@@ -32,7 +32,7 @@ public class ResponseTest {
     @Test
     public void shouldReturnHeaderValue() {
         Headers headers = new DefaultHeaders();
-        headers.add("my-header", "some-value");
+        headers.set("my-header", "some-value");
 
         Response response = builder.setHeaders(headers).build();
 
@@ -42,8 +42,8 @@ public class ResponseTest {
     @Test
     public void shouldReturnHeaderKeys() {
         Headers headers = new DefaultHeaders();
-        headers.add("my-header-1", "some-value");
-        headers.add("my-header-2", "some-value");
+        headers.set("my-header-1", "some-value");
+        headers.set("my-header-2", "some-value");
 
         Response response = builder.setHeaders(headers).build();
 

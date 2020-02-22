@@ -7,13 +7,13 @@ import java.util.Map;
 
 public interface Headers {
 
-    void addHeaders(HttpMessage message);
+    void setHeaders(HttpMessage message);
 
-    void addHeaders(org.apache.http.Header... headers);
+    void setHeaders(org.apache.http.Header... headers);
 
-    void add(Header header);
+    void set(Header header);
 
-    void add(String name, String value);
+    void set(String name, String value);
 
     String get(String name);
 
@@ -25,21 +25,21 @@ public interface Headers {
 
     Map<String, String> values();
 
-    void addBearerToken(String token);
+    void setBearerToken(String token);
 
-    void addBasicAuth(String token);
+    void setBasicAuth(String token);
 
     String getAuthorization();
 
     boolean hasAuthorization();
 
-    void addContentType(String contentType);
+    void setContentType(String contentType);
 
     String getContentType();
 
     boolean hasContentType();
 
-    void addAccept(String contentType);
+    void setAccept(String contentType);
 
     String getAccept();
 

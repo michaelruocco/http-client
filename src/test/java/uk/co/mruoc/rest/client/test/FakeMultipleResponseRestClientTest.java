@@ -74,7 +74,7 @@ public class FakeMultipleResponseRestClientTest {
     @Test
     public void recordsAllRequests() {
         Headers headers = new DefaultHeaders();
-        headers.add("key1", "value1");
+        headers.set("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);
         client.cannedResponse(400);
@@ -89,7 +89,7 @@ public class FakeMultipleResponseRestClientTest {
     @Test
     public void recordsAllRequestDetails() {
         Headers headers = new DefaultHeaders();
-        headers.add("key1", "value1");
+        headers.set("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);
         client.cannedResponse(400);
@@ -108,7 +108,7 @@ public class FakeMultipleResponseRestClientTest {
     @Test
     public void recordsAllRequestDetailsAsRequest() {
         Headers headers = new DefaultHeaders();
-        headers.add("key1", "value1");
+        headers.set("key1", "value1");
         client.cannedResponse(200);
         client.cannedResponse(300);
         client.cannedResponse(400);
@@ -126,7 +126,7 @@ public class FakeMultipleResponseRestClientTest {
 
     @Test
     public void canAddFullResponse() {
-        headers.add("key", "value");
+        headers.set("key", "value");
 
         client.cannedResponse(200, "first");
         client.cannedResponse(300, "second", headers);

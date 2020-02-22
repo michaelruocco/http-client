@@ -55,7 +55,7 @@ public class SimpleRestClientTest {
 
     @Test
     public void postHeadersAreAddedToRequest() {
-        headers.add("Some-Header", "Value");
+        headers.set("Some-Header", "Value");
         client.post(ENDPOINT, POST_BODY, headers);
 
         assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");
@@ -91,7 +91,7 @@ public class SimpleRestClientTest {
 
     @Test
     public void putHeadersAreAddedToRequest() {
-        headers.add("Some-Header", "Value");
+        headers.set("Some-Header", "Value");
         client.put(ENDPOINT, POST_BODY, headers);
 
         assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");
@@ -127,7 +127,7 @@ public class SimpleRestClientTest {
 
     @Test
     public void patchHeadersAreAddedToRequest() {
-        headers.add("Some-Header", "Value");
+        headers.set("Some-Header", "Value");
         client.patch(ENDPOINT, POST_BODY, headers);
 
         assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");
@@ -156,7 +156,7 @@ public class SimpleRestClientTest {
 
     @Test
     public void getHeadersAreAddedToRequest() {
-        headers.add("Some-Header", "Value");
+        headers.set("Some-Header", "Value");
         client.get(ENDPOINT, headers);
 
         assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");
@@ -185,7 +185,7 @@ public class SimpleRestClientTest {
 
     @Test
     public void deleteHeadersAreAddedToRequest() {
-        headers.add("Some-Header", "Value");
+        headers.set("Some-Header", "Value");
         client.delete(ENDPOINT, headers);
 
         assertThat(fakeHttp.lastRequestHeader("Some-Header")).isEqualTo("Value");

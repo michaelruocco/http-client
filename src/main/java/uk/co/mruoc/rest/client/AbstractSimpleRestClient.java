@@ -4,7 +4,13 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import uk.co.mruoc.rest.client.header.Headers;
 import uk.co.mruoc.rest.client.response.Response;
@@ -13,13 +19,11 @@ import uk.co.mruoc.rest.client.response.ResponseConverter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import static org.apache.http.HttpHeaders.ACCEPT;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 public abstract class AbstractSimpleRestClient extends BaseRestClient {
 
-    private final ResponseConverter converter = new ResponseConverter();
     private final HttpClient client;
+    private final ResponseConverter converter = new ResponseConverter();
 
     public AbstractSimpleRestClient(HttpClient client) {
         this.client = client;
@@ -96,7 +100,6 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
 
     private HttpGet createGet(String endpoint, Headers headers) {
         HttpGet get = new HttpGet(endpoint);
-        headers.add(ACCEPT, APPLICATION_JSON.getMimeType());
         addHeaders(get, headers);
         return get;
     }
@@ -108,7 +111,7 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
     }
 
     private void setEntity(HttpEntityEnclosingRequestBase request, String entity) {
-        request.setEntity(toJsonEntity(entity));
+        request.setEntity(toEntity(request, entity));
     }
 
     private void addHeaders(HttpRequest request, Headers headers) {
@@ -116,8 +119,8 @@ public abstract class AbstractSimpleRestClient extends BaseRestClient {
             request.setHeader(name, headers.get(name));
     }
 
-    private HttpEntity toJsonEntity(String entity) {
-        return new StringEntity(entity, APPLICATION_JSON);
+    private HttpEntity toEntity(HttpEntityEnclosingRequestBase request, String entity) {
+        return new StringEntity(entity, ContentTypeExtractor.extract(request));
     }
 
 }

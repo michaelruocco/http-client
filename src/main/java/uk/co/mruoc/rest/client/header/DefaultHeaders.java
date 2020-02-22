@@ -13,26 +13,26 @@ public class DefaultHeaders implements Headers {
     }
 
     public DefaultHeaders(HttpMessage message) {
-        addHeaders(message);
+        setHeaders(message);
     }
 
     @Override
-    public void addHeaders(HttpMessage message) {
-        addHeaders(message.getAllHeaders());
+    public void setHeaders(HttpMessage message) {
+        setHeaders(message.getAllHeaders());
     }
 
     @Override
-    public void addHeaders(org.apache.http.Header... headers) {
-        Arrays.stream(headers).forEach(h -> add(h.getName(), h.getValue()));
+    public void setHeaders(org.apache.http.Header... headers) {
+        Arrays.stream(headers).forEach(h -> set(h.getName(), h.getValue()));
     }
 
     @Override
-    public void add(Header header) {
-        add(header.getName(), header.getValue());
+    public void set(Header header) {
+        set(header.getName(), header.getValue());
     }
 
     @Override
-    public void add(String name, String value) {
+    public void set(String name, String value) {
         values.put(name, value);
     }
 
@@ -64,15 +64,15 @@ public class DefaultHeaders implements Headers {
     }
 
     @Override
-    public void addBearerToken(String token) {
+    public void setBearerToken(String token) {
         Header header = new BearerTokenHeader(token);
-        add(header);
+        set(header);
     }
 
     @Override
-    public void addBasicAuth(String token) {
+    public void setBasicAuth(String token) {
         Header header = new BasicAuthHeader(token);
-        add(header);
+        set(header);
     }
 
     @Override
@@ -86,9 +86,9 @@ public class DefaultHeaders implements Headers {
     }
 
     @Override
-    public void addContentType(String contentType) {
+    public void setContentType(String contentType) {
         Header header = new ContentTypeHeader(contentType);
-        add(header);
+        set(header);
     }
 
     @Override
@@ -102,9 +102,9 @@ public class DefaultHeaders implements Headers {
     }
 
     @Override
-    public void addAccept(String contentType) {
+    public void setAccept(String contentType) {
         Header header = new AcceptHeader(contentType);
-        add(header);
+        set(header);
     }
 
     @Override

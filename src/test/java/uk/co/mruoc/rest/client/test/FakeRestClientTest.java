@@ -63,7 +63,7 @@ public class FakeRestClientTest {
     @Test
     public void allowsPullingOutSingleHeader() {
         Headers headers = new DefaultHeaders();
-        headers.add("Custom-Header1", "headerValue1");
+        headers.set("Custom-Header1", "headerValue1");
 
         client.delete(ENDPOINT, headers);
 
@@ -106,7 +106,7 @@ public class FakeRestClientTest {
     @Test
     public void returnsCannedResponseHeaders() {
         Headers headers = new DefaultHeaders();
-        headers.add("Response-Header", "responseHeaderValue");
+        headers.set("Response-Header", "responseHeaderValue");
 
         client.cannedResponse(201, "CannedBody", headers);
 
@@ -157,7 +157,7 @@ public class FakeRestClientTest {
     @Test
     public void usingResponseReturnsCannedResponseHeaders() {
         Headers headers = new DefaultHeaders();
-        headers.add("Response-Header", "responseHeaderValue");
+        headers.set("Response-Header", "responseHeaderValue");
         Response response = new ResponseBuilder().setHeaders(headers).build();
 
         client.cannedResponse(response);

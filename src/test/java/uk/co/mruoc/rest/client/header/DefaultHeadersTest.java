@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-public class HeadersTest {
+public class DefaultHeadersTest {
 
     private final HttpMessage httpMessage = mock(HttpMessage.class);
 
@@ -26,38 +26,38 @@ public class HeadersTest {
 
     @Test
     public void shouldWriteHeaderValues() {
-        headers.add("name", "value1");
+        headers.set("name", "value1");
 
         assertThat(headers.get("name")).isEqualTo("value1");
     }
 
     @Test
     public void sizeShouldIncrementWhenHeadersAdded() {
-        headers.add("name", "value1");
+        headers.set("name", "value1");
 
         assertThat(headers.size()).isEqualTo(1);
     }
 
     @Test
     public void shouldOverwriteExistingHeaderValues() {
-        headers.add("name", "value1");
-        headers.add("name", "value2");
+        headers.set("name", "value1");
+        headers.set("name", "value2");
 
         assertThat(headers.get("name")).isEqualTo("value2");
     }
 
     @Test
     public void sizeShouldNotIncrementWhenHeaderValueOverwritten() {
-        headers.add("name", "value1");
-        headers.add("name", "value2");
+        headers.set("name", "value1");
+        headers.set("name", "value2");
 
         assertThat(headers.size()).isEqualTo(1);
     }
 
     @Test
     public void shouldReturnHeaderKeys() {
-        headers.add("name1", "value1");
-        headers.add("name2", "value2");
+        headers.set("name1", "value1");
+        headers.set("name2", "value2");
 
         assertThat(headers.getNames()).containsExactlyInAnyOrder("name1", "name2");
     }
@@ -67,17 +67,17 @@ public class HeadersTest {
         org.apache.http.Header[] apacheHeaders = givenHttpMessageWillReturnHeaders();
 
         Headers newHeaders = new DefaultHeaders(httpMessage);
-        newHeaders.addHeaders(httpMessage);
+        newHeaders.setHeaders(httpMessage);
 
         assertThat(newHeaders.get(apacheHeaders[0].getName())).isEqualTo(apacheHeaders[0].getValue());
         assertThat(newHeaders.get(apacheHeaders[1].getName())).isEqualTo(apacheHeaders[1].getValue());
     }
 
     @Test
-    public void shouldAddCustomBasicHeader() {
+    public void shouldSetCustomBasicHeader() {
         Header header = new SimpleHeader("custom-name", "custom-value");
 
-        headers.add(header);
+        headers.set(header);
 
         assertThat(headers.get(header.getName())).isEqualTo(header.getValue());
     }
@@ -91,16 +91,16 @@ public class HeadersTest {
     public void shouldReturnTrueIfContainsHeader() {
         Header header = new SimpleHeader("custom-name", "custom-value");
 
-        headers.add(header);
+        headers.set(header);
 
         assertThat(headers.contains(header.getName())).isTrue();
     }
 
     @Test
-    public void shouldAddBearerToken() {
+    public void shouldSetBearerToken() {
         String token = "my-token";
 
-        headers.addBearerToken(token);
+        headers.setBearerToken(token);
 
         assertThat(headers.getAuthorization()).isEqualTo("Bearer " + token);
     }
@@ -109,16 +109,16 @@ public class HeadersTest {
     public void shouldHaveBearerTokenIfSet() {
         String token = "my-token";
 
-        headers.addBearerToken(token);
+        headers.setBearerToken(token);
 
         assertThat(headers.hasAuthorization()).isTrue();
     }
 
     @Test
-    public void shouldAddContentType() {
+    public void shouldSetContentType() {
         String contentType = "application/json";
 
-        headers.addContentType(contentType);
+        headers.setContentType(contentType);
 
         assertThat(headers.getContentType()).isEqualTo(contentType);
     }
@@ -132,16 +132,16 @@ public class HeadersTest {
     public void shouldHaveContentTypeIfSet() {
         String contentType = "application/json";
 
-        headers.addContentType(contentType);
+        headers.setContentType(contentType);
 
         assertThat(headers.hasContentType()).isTrue();
     }
 
     @Test
-    public void shouldAddAccept() {
+    public void shouldSetAccept() {
         String accept = "application/json";
 
-        headers.addAccept(accept);
+        headers.setAccept(accept);
 
         assertThat(headers.getAccept()).isEqualTo(accept);
     }
@@ -155,16 +155,16 @@ public class HeadersTest {
     public void shouldHaveAcceptIfSet() {
         String accept = "application/json";
 
-        headers.addAccept(accept);
+        headers.setAccept(accept);
 
         assertThat(headers.hasAccept()).isTrue();
     }
 
     @Test
-    public void shouldAddBasicAuth() {
+    public void shouldSetBasicAuth() {
         String authToken = "my-token";
 
-        headers.addBasicAuth(authToken);
+        headers.setBasicAuth(authToken);
 
         assertThat(headers.getAuthorization()).isEqualTo("Basic " + authToken);
     }
@@ -178,7 +178,7 @@ public class HeadersTest {
     public void shouldHaveAuthorizationIfBasicAuthSet() {
         String authToken = "my-token";
 
-        headers.addBasicAuth(authToken);
+        headers.setBasicAuth(authToken);
 
         assertThat(headers.hasAuthorization()).isTrue();
     }

@@ -43,7 +43,7 @@ For each of the calls you can also pass headers if you wish, e.g:
 ```
 RestClient client = new SimpleRestClient();
 Headers headers = new Headers();
-headers.add("Custom-Header", "Value");
+headers.set("Custom-Header", "Value");
 
 Response response = client.get("http://localhost:8080/testEndpoint", headers);
 ```
@@ -55,8 +55,8 @@ and content type:
 ```
 RestClient client = new SimpleRestClient();
 Headers headers = new Headers();
-headers.add(new BearerTokenHeader("my-token-value"));
-headers.add(new ContentTypeHeader("application/json"));
+headers.set(new BearerTokenHeader("my-token-value"));
+headers.set(new ContentTypeHeader("application/json"));
 
 Response response = client.get("http://localhost:8080/testEndpoint", headers);
 ```
