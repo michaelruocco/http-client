@@ -1,4 +1,4 @@
-# Http Client
+# Rest Client
 
 [![Build Status](https://travis-ci.org/michaelruocco/http-client.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client)
 [![Coverage Status](https://coveralls.io/repos/github/michaelruocco/http-client/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/http-client?branch=master)
@@ -15,17 +15,17 @@ gradle you would do this by adding the following to your build.gradle file:
 
 ```
 dependencies {
-    compile 'com.github.michaelruocco:http-client:4.0.4'
+    compile 'com.github.michaelruocco:rest-client:5.0.0'
 }
 ```
 
 ### Basic Usage
 
-You can then create and instance of the SimpleHttpClient class to perform
+You can then create and instance of the SimpleRestClient class to perform
 RESTful api calls e.g.
 
 ```
-HttpClient client = new SimpleHttpClient();
+RestClient client = new SimpleRestClient();
 
 Response getResponse = client.get("http://localhost:8080/testEndpoint");
 
@@ -41,7 +41,7 @@ Response deleteResponse = client.delete("http://localhost:8080/testEndpoint");
 For each of the calls you can also pass headers if you wish, e.g:
 
 ```
-HttpClient client = new SimpleHttpClient();
+RestClient client = new SimpleRestClient();
 Headers headers = new Headers();
 headers.add("Custom-Header", "Value");
 
@@ -53,7 +53,7 @@ default header implementations for common headers such as authorization bearer t
 and content type:
 
 ```
-HttpClient client = new SimpleHttpClient();
+RestClient client = new SimpleRestClient();
 Headers headers = new Headers();
 headers.add(new BearerTokenHeader("my-token-value"));
 headers.add(new ContentTypeHeader("application/json"));
@@ -73,7 +73,7 @@ can create an instance of InsecureSimpleHttpClient. It is only recommended that 
 this when testing, and never in a production system.
 
 ```
-HttpClient client = new InsecureSimpleHttpClient();
+RestClient client = new InsecureRestClient();
 
 ...
 ```
@@ -86,9 +86,9 @@ simple PUT request we can use the fake client to assert on the request body:
 
 ```
 public class Example {
-    private final HttpClient client;
+    private final RestClient client;
 
-    public Example(HttpClient client) {
+    public Example(RestClient client) {
         this.client = client;
     }
 
@@ -101,7 +101,7 @@ public class ExampleTest {
 
     @Test
     public void doesPut() throws IOException {
-        FakeHttpClient client = new FakeHttpClient();
+        FakeRestClient client = new FakeRestClient();
         Example example = new Example(client);
 
         String jsonContent = "{\"foo\": \"bar\"}";
