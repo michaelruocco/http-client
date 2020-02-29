@@ -131,7 +131,8 @@ bintray {
     key = System.getenv('BINTRAY_KEY')
     publications = ['mavenPublication']
     publish = true
-
+    override = true
+    
     pkg {
         repo = 'maven'
         name = 'rest-client'
