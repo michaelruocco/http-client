@@ -1,9 +1,9 @@
 # Rest Client
 
-[![Build Status](https://travis-ci.org/michaelruocco/http-client.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client)
-[![codecov](https://codecov.io/gh/michaelruocco/http-client/branch/master/graph/badge.svg)](https://codecov.io/gh/michaelruocco/http-client)
+[![Build Status](https://travis-ci.org/michaelruocco/rest-client.svg?branch=master)](https://travis-ci.org/michaelruocco/rest-client)
+[![codecov](https://codecov.io/gh/michaelruocco/rest-client/branch/master/graph/badge.svg)](https://codecov.io/gh/michaelruocco/rest-client)
 [![Download](https://api.bintray.com/packages/michaelruocco/maven/rest-client/images/download.svg) ](https://bintray.com/michaelruocco/maven/rest-client/_latestVersion)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54ce00d4a4084dabba53f5e2c5ef9a01)](https://www.codacy.com/app/michael-ruocco/http-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/http-client&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/19885f1d067548568ab49d06ec5a3f4e)](https://www.codacy.com/manual/michaelruocco/rest-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/rest-client&amp;utm_campaign=Badge_Grade)
 
 This project aims to provide a simpler interface for RESTful JSON api calls.
 It also includes a fake implementation to make testing of client code easier.
