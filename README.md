@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/michaelruocco/rest-client/branch/master/graph/badge.svg)](https://codecov.io/gh/michaelruocco/rest-client)
 [![Download](https://api.bintray.com/packages/michaelruocco/maven/rest-client/images/download.svg) ](https://bintray.com/michaelruocco/maven/rest-client/_latestVersion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/19885f1d067548568ab49d06ec5a3f4e)](https://www.codacy.com/manual/michaelruocco/rest-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/rest-client&amp;utm_campaign=Badge_Grade)
+[![BCH compliance](https://bettercodehub.com/edge/badge/michaelruocco/rest-client?branch=master)](https://bettercodehub.com/)
 
 This project aims to provide a simpler interface for RESTful JSON api calls.
 It also includes a fake implementation to make testing of client code easier.
